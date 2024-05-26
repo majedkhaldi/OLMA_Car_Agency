@@ -52,6 +52,7 @@ class Car(models.Model):
     year = models.PositiveIntegerField(max_length=4)
     price = models.FloatField()
     img = models.TextField()
+    color = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
     cart = models.ForeignKey(Cart, related_name="cars", on_delete=models.CASCADE, null = True, blank= True)
