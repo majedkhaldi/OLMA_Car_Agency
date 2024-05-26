@@ -47,7 +47,11 @@ def cars_page(request):
 
     data = {
         "usernow" : User.objects.get(id=request.session['userid']),
-        "cars" : Car.objects.all()
+        "cars" : Car.objects.all(),
+        "makes" : Car.objects.values_list('make', flat=True).distinct(),
+        "models" : Car.objects.values_list('model', flat=True).distinct(),
+        "colors" : Car.objects.values_list('color', flat=True).distinct(),
+
     }
     return render(request,"cars.html",data)
 

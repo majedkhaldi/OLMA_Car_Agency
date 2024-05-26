@@ -11,5 +11,35 @@
     <h1>{{car.make}}</h1>
     <h2>{{car.model}}</h2>
     <h3>{{car.year}}</h3>
+    <h2>{{car.price}}</h2>
+    {%endfor%}
+    <form method="get">
+        <label>Make</label>
+        <select name="make" >
+            <option value="">All</option>
+            {% for make in makes %}
+            <option value="{{make}}">{{make}}</option>
+            {%endfor%}
+        </select>
+        <label>Model</label>
+        <select name="model" >
+            <option value="">All</option>
+            {% for model in models %}
+            <option value="{{model}}">{{model}}</option>
+            {%endfor%}
+        </select>
+        <label>Color</label>
+        <select name="color" >
+            <option value="">All</option>
+            {% for color in colors %}
+            <option value="{{color}}">{{color}}</option>
+            {%endfor%}
+        </select>
+        <label for="min_price">Min Price:</label>
+        <input type="number" step="0.01" name="min_price" id="min_price">
+        <label for="max_price">Max Price:</label>
+        <input type="number" step="0.01" name="max_price" id="max_price">
+        <button type="submit">Filter</button>
+    </form>
 </body>
 </html>
