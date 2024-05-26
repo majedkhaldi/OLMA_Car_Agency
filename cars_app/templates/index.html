@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Responsive Navbar with Background Overlay</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
 </head>
 <body>
-    <a href="cars">Get Started</a>
-    <a href="loginpage">Login</a>
-    <a href="aboutus">About Us</a>
-    <a href="contactus">Contact Us</a>
-    <a href="faqs">FAQs</a>
-    
+    <div class="background-overlay">
+        <nav>
+            <ul class="navbar">
+                <li><a href="loginpage">User</a></li>
+                <li><a href="faqs">FAQs</a></li>
+                <li><a href="aboutus">About Us</a></li>
+                <li><a href="contactus">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="all-header-contents">
+            <div class="header-content">
+                <h1>Unlock Your Journey, Drive Uniqueness</h1>
+                <a href="cars"><button class="btn">Take a Journey</button></a>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

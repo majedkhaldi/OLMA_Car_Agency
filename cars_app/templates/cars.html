@@ -3,43 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+    <title>Responsive Form and Table</title>
 </head>
 <body>
-    {% for car in cars %}
-    <img src="{{car.img}}" alt="car picture">
-    <h1>{{car.make}}</h1>
-    <h2>{{car.model}}</h2>
-    <h3>{{car.year}}</h3>
-    <h2>{{car.price}}</h2>
+    <div class="user-top">
+        <a href="index.html">Main Page</a>
+    </div>
+    <div class="user-form">
+        <form action="Process">
+            <select name="make" id="make">
+                <option>--Make--</option>
+            </select>
+            <select name="model" id="model">
+                <option>--Model--</option>
+            </select>
+            <select name="year_from" id="year_from">
+                <option>--Year From--</option>
+            </select>
+            <select name="color" id="color">
+                <option>--Color--</option>
+            </select>
+            <select name="price" id="price">
+                <option>--Price--</option>
+            </select>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+    {%for car in cars%}
+    <div class="carsCard">
+        <img src="{{car.img}}" alt="bmw">
+        <h3>{{car.make}}</h3>
+        <h3>{{car.model}}</h3>
+        <h3>{{car.year}}</h3>
+        <h3>{{car.price}}</h3>
+        <input type="submit" value="Add to Cart">
+    </div>
     {%endfor%}
-    <form method="get">
-        <label>Make</label>
-        <select name="make" >
-            <option value="">All</option>
-            {% for make in makes %}
-            <option value="{{make}}">{{make}}</option>
-            {%endfor%}
-        </select>
-        <label>Model</label>
-        <select name="model" >
-            <option value="">All</option>
-            {% for model in models %}
-            <option value="{{model}}">{{model}}</option>
-            {%endfor%}
-        </select>
-        <label>Color</label>
-        <select name="color" >
-            <option value="">All</option>
-            {% for color in colors %}
-            <option value="{{color}}">{{color}}</option>
-            {%endfor%}
-        </select>
-        <label for="min_price">Min Price:</label>
-        <input type="number" step="0.01" name="min_price" id="min_price">
-        <label for="max_price">Max Price:</label>
-        <input type="number" step="0.01" name="max_price" id="max_price">
-        <button type="submit">Filter</button>
-    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'js/main.js' %}">
 </body>
 </html>
