@@ -49,14 +49,14 @@ class Cart(models.Model):
 class Car(models.Model):
     make = models.CharField(max_length=45)
     model = models.CharField(max_length=45)
-    year = models.PositiveIntegerField(max_length=4)
+    year = models.PositiveIntegerField()
     price = models.FloatField()
     img = models.TextField()
     color = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
     cart = models.ForeignKey(Cart, related_name="cars", on_delete=models.CASCADE, null = True, blank= True)
-    users = models.ManyToManyField(User,related_name="cars", null = True, blank= True)
+    users = models.ManyToManyField(User,related_name="cars", blank= True)
     objects = CarManager() 
 
 
