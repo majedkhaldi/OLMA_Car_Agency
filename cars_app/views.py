@@ -2,17 +2,27 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import Order ,Cart,Car ,User
+from .models import User, Order, Cart, Car
 from datetime import date
 import bcrypt
 
 def index(request):
+    return render(request,"index.html")
+
+def register(request):
+    if 'userid' in request.session:
+        return redirect("index")
+    return render(request,"register.html")
+
+def login_page(request):
+    if 'userid' in request.session:
+        return redirect("index")
     return render(request,"login.html")
 
-def AboutUs(request):
+def aboutUs(request):
     return render(request, 'aboutus.html')
 
-def ContactUs(request):
+def contactUs(request):
     if request.method == 'POST':
         username = request.POST.get('usernameCont')
         useremail = request.POST.get('useremail')
@@ -32,22 +42,22 @@ def ContactUs(request):
 
 
 
-def creat(request):
+def create(request):
         
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
         messages.error(request, 'Registration failed.')
-        return render(request,'login.html', {'errors': errors})
+        return render(request,'register.html', {'errors': errors})
     else:
         name = request.POST['name']
         email = request.POST['email']
         password = request.POST['password']
-        phone_num = request.POST['phone']
-        User.objects.create(name=name,email=email,phone_number =phone_num,password=bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode())
-        messages.success(request, 'Registration successful. You can now log in.')
-        return render(request ,"login.html")
+        phone_num = request.POST['pnumber']
+        logged_user = User.objects.create(name=name,email=email,phone_number =phone_num,password=bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode())
+        request.session['userid'] = logged_user.id
+        return redirect("index")
 
-def Login(request):
+def login(request):
     email = request.POST.get('emailLog')
     password = request.POST.get('pass')
     user = User.objects.filter(email=email)  
@@ -57,10 +67,10 @@ def Login(request):
             request.session['userid'] = logged_user.id
             return redirect("cars_page")
         else:
-            messages.error(request, 'Incorrect Password')
+            messages.error(request, 'Incorrect Password', extra_tags= 'emailnotfound')
     else:
-        messages.error(request, 'Email not found')
-    return redirect('index')
+        messages.error(request, 'Email not found', extra_tags= 'incorrectpass')
+    return redirect('/loginpage')
 
 def cars_page(request):
     cars = Car.objects.all()
@@ -102,7 +112,7 @@ def car_detail(request, C_id):
     return render(request, 'car_details.html', {'car': car})
 
 
-def ShoppingCart(request, C_id):
+def shoppingCart(request, C_id):
     if 'userid' not in request.session:
         return redirect('login')
     
@@ -134,5 +144,10 @@ def checkout(request):
     return HttpResponse(request,'Your items have been added to the order.\n We will contact you soon.')  # Redirect to a success page or order summary
 
 
-def FAQS(request):
+def fAQS(request):
     return render(request, 'faqs.html')
+
+def logout(request):
+    del request.session['userid']
+    return redirect('/loginpage')
+
