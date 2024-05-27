@@ -13,12 +13,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
 
 <div class="container">
-  <form >
+  <form action="login" method="post">
+    {% csrf_token %}
     <p>Welcome</p>
-    <input type="email" placeholder="Email" required><br>
-    <input type="password" placeholder="Password" required><br>
-    <input type="button" value="Sign in"><br>
-    <a href="#">Register</a>
+    <input type="email" placeholder="Email" name="emailLog"><br>
+
+    <input type="password" placeholder="Password" name="pass" required><br>
+    <ul class="messages">
+    {% for message in messages %} 
+    {% if 'incorrectpass' in message.tags %}
+    {{ message }}
+    {% endif %} 
+    {% endfor %}
+    </ul>
+    <ul class="messages">
+      {% for message in messages %} 
+      {% if 'emailnotfound' in message.tags %}
+      {{ message }}
+      {% endif %} 
+      {% endfor %}
+      </ul>
+    <input type="submit" value="Sign in"><br>
+    <a href="registerpage">Register</a>
   </form>
 
   <div class="drops">
