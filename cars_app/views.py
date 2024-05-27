@@ -8,12 +8,12 @@ def index(request):
     return render(request,"index.html")
 
 def login_page(request):
-    if "userid" in request.eseeion:
+    if "userid" in request.session:
         return redirect('/cars')
     return render(request,"login.html")
 
 def register_page(request):
-    if "userid" in request.eseeion:
+    if "userid" in request.session:
         return redirect('/cars')
     return render(request,"register.html")
 

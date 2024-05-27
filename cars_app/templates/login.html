@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>login page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
 </head>
 <body>
-    <form action="login" method="post">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
 
-        <button>login</button>
-    </form>
+<div class="container">
+  <form >
+    <p>Welcome</p>
+    <input type="email" placeholder="Email" required><br>
+    <input type="password" placeholder="Password" required><br>
+    <input type="button" value="Sign in"><br>
+    <a href="#">Register</a>
+  </form>
+
+  <div class="drops">
+    <div class="drop drop-1"></div>
+    <div class="drop drop-2"></div>
+    <div class="drop drop-3"></div>
+    <div class="drop drop-4"></div>
+    <div class="drop drop-5"></div>
+  </div>
+</div>
 </body>
 </html>
