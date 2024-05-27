@@ -57,7 +57,8 @@
         <h3>{{car.model}}</h3>
         <h3>{{car.year}}</h3>
         <h3>{{car.price}}</h3>
-        <input type="submit" value="Add to Cart">
+        <a href="shoppingcart/{{car.id}}"><button>Add to Cart</button></a>
+        <a href="cardetails/{{car.id}}">view detail</a>
     </div>
     {%endfor%}
     </div>

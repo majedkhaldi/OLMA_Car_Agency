@@ -40,7 +40,7 @@ class User(models.Model):
 
 
 class Cart(models.Model):
-    quantity = models.PositiveIntegerField()
+    total_price = models.PositiveIntegerField(default=0)
     user = models.OneToOneField(User,on_delete= models.CASCADE)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
@@ -53,9 +53,10 @@ class Car(models.Model):
     price = models.FloatField()
     img = models.TextField()
     color = models.CharField(max_length=45)
+    inventory = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
-    cart = models.ForeignKey(Cart, related_name="cars", on_delete=models.CASCADE, null = True, blank= True)
+    carts = models.ManyToManyField(Cart, related_name="cars", blank= True)
     users = models.ManyToManyField(User,related_name="cars", blank= True)
     objects = CarManager() 
 
@@ -71,7 +72,7 @@ class Order(models.Model):
 
 class Appointment(models.Model):
     user = models.ForeignKey (User,on_delete= models.CASCADE, related_name= 'appointments')
-    date = models.DateField()
+    date = models.DateField(null=True)
     status = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
