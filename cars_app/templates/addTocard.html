@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addTocart.css' %}">
+</head>
+<body>
+
+<div class="all-contents">
+    <nav>
+        <ul class="navbar">
+            <li><a href="main.html">Main Page</a></li>
+        </ul>
+    </nav>
+    
+    <div class="flex-contents">
+    <div class="container">
+        <h1>Car Agency Inventory</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Car Image</th>
+                    <th>Car Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cart.cars.all %}
+                <tr>
+                    <td><img width="100px" src="{{car.img}}" alt=""></td>
+                    <td>{{car.make}}</td>
+                    <td>{{car.model}}</td>
+                    <td>{{car.year}}</td>
+                    <td class="price">{{car.price}}</td>
+                    <td><input type="number" value="1" min="1" class="quantity" name="quantity"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="summary-container">
+            <p>Total Price: $<span id="totalPrice">{{cart.total_price}}</span></p>
+            <p>Total Quantity: <span id="totalQuantity">{{total_quantity}}</span></p>
+            <button id="checkoutButton">Checkout</button>
+        </div>
+    </div>
+</div>
+    <!-- <script src="static/addtocart.js"></script> -->
+</div>
+    <script>
+        
+    </script>
+</body>
+</html>

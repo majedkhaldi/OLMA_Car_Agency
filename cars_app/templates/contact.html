@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <title>Contact Us - Car Agency</title>
+</head>
+<body>
+    <div class="contact-top">
+        <a href="/">Main Page</a>
+    </div>
+    <div class="contact-content">
+        <h1>Contact Us</h1>
+        <p>If you have any questions, feel free to reach out to us using the form below.</p>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        <form method="post" action="{% url 'ContactUs' %}" class="contact-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="usernameCont" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="useremail" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="Message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+</body>
+</html>

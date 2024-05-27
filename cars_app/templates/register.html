@@ -19,7 +19,7 @@
         <input name="name" class="input" type="text" placeholder=" " required>
         <ul class="messages">
           {% for message in messages %} 
-          {% if 'incorrectpass' in message.tags %}
+          {% if 'nameerror' in message.tags %}
           {{ message }}
           {% endif %} 
           {% endfor %}
@@ -31,7 +31,7 @@
         <input name="pnumber" class="input" type="text" placeholder=" " required>
         <ul class="messages">
           {% for message in messages %} 
-          {% if 'incorrectpass' in message.tags %}
+          {% if 'phoneerror' in message.tags %}
           {{ message }}
           {% endif %} 
           {% endfor %}
@@ -43,7 +43,7 @@
         <input name="email" class="input" type="email" placeholder=" "  required>
         <ul class="messages">
           {% for message in messages %} 
-          {% if 'incorrectpass' in message.tags %}
+          {% if 'emailerror' in message.tags %}
           {{ message }}
           {% endif %} 
           {% endfor %}
@@ -56,7 +56,7 @@
         <input type="password" name="password" class="input" placeholder=" "  required>
         <ul class="messages">
           {% for message in messages %} 
-          {% if 'incorrectpass' in message.tags %}
+          {% if 'passworderror' in message.tags %}
           {{ message }}
           {% endif %} 
           {% endfor %}
@@ -69,7 +69,7 @@
         <input type="password" name="cpassword" class="input" placeholder=" "  required>
         <ul class="messages">
           {% for message in messages %} 
-          {% if 'incorrectpass' in message.tags %}
+          {% if 'cpassworderror' in message.tags %}
           {{ message }}
           {% endif %} 
           {% endfor %}

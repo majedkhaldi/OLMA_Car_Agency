@@ -20,7 +20,7 @@ def login_page(request):
     return render(request,"login.html")
 
 def aboutUs(request):
-    return render(request, 'aboutus.html')
+    return render(request, 'about.html')
 
 def contactUs(request):
     if request.method == 'POST':
@@ -38,16 +38,25 @@ def contactUs(request):
                 return redirect('ContactUs')
         else:
             messages.error(request, 'All fields are required.')
-    return render(request, 'contact_us.html')
+    return render(request, 'contact.html')
 
 
 
 def create(request):
-        
+
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
-        messages.error(request, 'Registration failed.')
-        return render(request,'register.html', {'errors': errors})
+        for name, value in errors.items():
+            messages.error(request, value, extra_tags= 'nameerror')
+        for email, value in errors.items():
+            messages.error(request, value, extra_tags= 'emailerror')
+        for pnumber, value in errors.items():
+            messages.error(request, value, extra_tags= 'phoneerror')
+        for password, value in errors.items():
+            messages.error(request, value, extra_tags= 'passworderror')
+        for cpassword, value in errors.items():
+            messages.error(request, value, extra_tags= 'cpassworderror')
+        return redirect('/registerpage')
     else:
         name = request.POST['name']
         email = request.POST['email']
@@ -55,6 +64,7 @@ def create(request):
         phone_num = request.POST['pnumber']
         logged_user = User.objects.create(name=name,email=email,phone_number =phone_num,password=bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode())
         request.session['userid'] = logged_user.id
+        Cart.objects.create(user= logged_user)
         return redirect("index")
 
 def login(request):
@@ -77,10 +87,12 @@ def cars_page(request):
     makes = Car.objects.values_list('make', flat=True).distinct()
     models = Car.objects.values_list('model', flat=True).distinct()
     colors = Car.objects.values_list('color', flat=True).distinct()
+    years = Car.objects.values_list('year', flat=True).distinct()
 
     make_filter = request.GET.get('make')
     model_filter = request.GET.get('model')
     color_filter = request.GET.get('color')
+    year_filter = request.GET.get('year_from')
     min_price_filter = request.GET.get('min_price')
     max_price_filter = request.GET.get('max_price')
 
@@ -90,58 +102,136 @@ def cars_page(request):
         cars = cars.filter(model=model_filter)
     if color_filter:
         cars = cars.filter(color=color_filter)
+    if year_filter:
+        cars = cars.filter(year=year_filter)
     if min_price_filter:
         cars = cars.filter(price__gte=min_price_filter)
     if max_price_filter:
         cars = cars.filter(price__lte=max_price_filter)
 
     data = {
-        "usernow" : User.objects.get(id=request.session['userid']),
+        # "usernow" : User.objects.get(id=request.session['userid']),
         "cars" : cars,
         "makes" : makes,
         "models" : models,
         "colors" : colors,
+        "years" : years,
     }
 
     return render(request,"cars.html",data)
 
 
 
-def car_detail(request, C_id):
-    car =Car.objects.get(id=C_id) 
+def car_detail(request, c_id):
+    car =Car.objects.get(id=c_id) 
     return render(request, 'car_details.html', {'car': car})
 
 
-def shoppingCart(request, C_id):
+def shoppingCart(request):
     if 'userid' not in request.session:
-        return redirect('login')
-    
+        return redirect('Login')
     user = User.objects.get(id=request.session['userid'])
-    car =Car.objects.get(id=C_id) 
-    cart = Cart.objects.get(car=car, user=user)
-    return render(request, 'shoppingCart.html', {'cart': cart})
+    cart = Cart.objects.get(user=user)
+    total_quantity = 0
+    if request.method == 'POST':
+        for car in cart.cars.all():
+            quantity_key = 'quantity_{}'.format(car.id)
+            if quantity_key in request.POST:
+                quantity = int(request.POST[quantity_key])
+                total_quantity += quantity
+                cart.total_price += quantity * car.price
+    return render(request,'addTocard.html',{'cart': cart, 'total_quantity': total_quantity})
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def update_cart(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.session['userid'])
+        cart = Cart.objects.get(user=user)
+        
+        car_id = request.POST.get('car_id')
+        quantity = int(request.POST.get('quantity'))
+        
+        car = cart.cars.get(id=car_id)
+        car_quantity = car.quantity
+        
+        # Calculate new totals
+        total_quantity = 0
+        total_price = 0
+        
+        for car in cart.cars.all():
+            if car.id == int(car_id):
+                car_quantity = quantity
+            total_quantity += car_quantity
+            total_price += car_quantity * car.price
+        
+        # Return updated totals
+        data = {
+            'total_quantity': total_quantity,
+            'total_price': total_price
+        }
+        return JsonResponse(data)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+def addtocart(request, C_id):
+    user = User.objects.get(id=request.session['userid'])
+    car = Car.objects.get(id=C_id)
+    cart = Cart.objects.get(user=user)
+    
+    if car.inventory > 0:
+        cart.cars.add(car)
+
+        
+    # carsINcart = cart.cars.all()
+    # total_amount = 0
+    # for car in carsINcart:
+    #     total_amount += car.price
+
+    return redirect('shoppingcart')
 
 
 def checkout(request):
     if 'userid' not in request.session:
         return redirect('login')
-    cart = Cart.objects.get(user=request.user)
+    user = User.objects.get(id=request.session['userid'])
+    cart = Cart.objects.get(user=user)
     cars_in_cart = cart.cars.all()
-    total_amount = sum(car.price for car in cars_in_cart)
+    
+    if 'quantity_ordered' not in request.session:
+            request.session['quantity_ordered'] = 0
+    else:
+            for car in cars_in_cart:
+                request.session['quantity_ordered'] += 1
+
+
+    if 'total_amount' not in request.session:
+            request.session['total_amount'] = 0
+    else:
+            for car in cars_in_cart:
+                request.session['total_amount'] += car.price
 
     for car in cars_in_cart:
         Order.objects.create(
-            car=car,
-            user=request.user,
-            total_amount=total_amount,
-            date=date.today(),
-            status='Pending'
-        )
-        car.cart = None
-        car.save()
+            car=car,user=request.user,price=car.price,date=date.today(),status='Pending')
+        cart.delete() 
+        del request.session['total_amount']
+        del request.session['quantity_ordered']
+        messages.error(request, 'Your items have been added to the order.\n We will contact you soon.')
+        return redirect('chre')
 
-    cart.delete() 
-    return HttpResponse(request,'Your items have been added to the order.\n We will contact you soon.')  # Redirect to a success page or order summary
+
+def chre(request):
+    quantity_ordered = request.session.get('quantity_ordered')
+    total_price = request.session.get('total_price')
+
+    context = {
+        'quantity_ordered': quantity_ordered,
+        'total_price': total_price,
+    }
+    return render(request, "checkout.html", context)
 
 
 def fAQS(request):

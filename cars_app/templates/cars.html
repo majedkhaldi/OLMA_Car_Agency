@@ -12,28 +12,44 @@
 </head>
 <body>
     <div class="user-top">
-        <a href="index.html">Main Page</a>
+        <a href="/">Main Page</a>
+        {% if request.session.userid%}
+        <a class="log" href="logout">Logout</a>
+        {%endif%}
     </div>
     <div class="user-form">
-        <form action="Process">
+        <form action="process" >
             <select name="make" id="make">
-                <option>--Make--</option>
+                <option value="">--Make--</option>
+                {% for make in makes %}
+                <option value="{{make}}">{{make}}</option>
+                {%endfor%}
             </select>
             <select name="model" id="model">
-                <option>--Model--</option>
+                <option value="">--Model--</option>
+                {% for model in models %}
+                <option value="{{model}}">{{model}}</option>
+                {%endfor%}
             </select>
             <select name="year_from" id="year_from">
-                <option>--Year From--</option>
+                <option value="">--Year From--</option>
+                {% for year in years %}
+                <option value="{{year}}">{{year}}</option>
+                {%endfor%}
             </select>
             <select name="color" id="color">
-                <option>--Color--</option>
+                <option value="">--Color--</option>
+                {% for color in colors %}
+                <option value="{{color}}">{{color}}</option>
+                {%endfor%}
             </select>
             <select name="price" id="price">
                 <option>--Price--</option>
             </select>
-            <button type="reset">Reset</button>
+            <button type="submit">Filter</button>
         </form>
     </div>
+    <div class="all-cars"></div>
     {%for car in cars%}
     <div class="carsCard">
         <img src="{{car.img}}" alt="bmw">
@@ -41,9 +57,11 @@
         <h3>{{car.model}}</h3>
         <h3>{{car.year}}</h3>
         <h3>{{car.price}}</h3>
-        <input type="submit" value="Add to Cart">
+        <a href="shoppingcart/{{car.id}}"><button>Add to Cart</button></a>
+        <a href="cardetails/{{car.id}}">view detail</a>
     </div>
     {%endfor%}
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% load static %}
       <link rel="stylesheet" href="{% static 'js/main.js' %}">
