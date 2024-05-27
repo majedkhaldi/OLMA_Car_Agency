@@ -24,7 +24,7 @@ urlpatterns = [
     
     path('create', views.create ,name='create'),  
     path('login', views.login,name='Login'), 
-    path('cars', views.cars_page,name='cars_page'), 
+    path('process', views.cars_page,name='cars_page'), 
     path('registerpage', views.register),	
     path('loginpage', views.login_page),	
     path('logout', views.logout),	

@@ -86,10 +86,12 @@ def cars_page(request):
     makes = Car.objects.values_list('make', flat=True).distinct()
     models = Car.objects.values_list('model', flat=True).distinct()
     colors = Car.objects.values_list('color', flat=True).distinct()
+    years = Car.objects.values_list('year', flat=True).distinct()
 
     make_filter = request.GET.get('make')
     model_filter = request.GET.get('model')
     color_filter = request.GET.get('color')
+    year_filter = request.GET.get('year_from')
     min_price_filter = request.GET.get('min_price')
     max_price_filter = request.GET.get('max_price')
 
@@ -99,17 +101,20 @@ def cars_page(request):
         cars = cars.filter(model=model_filter)
     if color_filter:
         cars = cars.filter(color=color_filter)
+    if year_filter:
+        cars = cars.filter(year=year_filter)
     if min_price_filter:
         cars = cars.filter(price__gte=min_price_filter)
     if max_price_filter:
         cars = cars.filter(price__lte=max_price_filter)
 
     data = {
-        "usernow" : User.objects.get(id=request.session['userid']),
+        # "usernow" : User.objects.get(id=request.session['userid']),
         "cars" : cars,
         "makes" : makes,
         "models" : models,
         "colors" : colors,
+        "years" : years,
     }
 
     return render(request,"cars.html",data)
