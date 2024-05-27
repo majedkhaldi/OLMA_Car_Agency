@@ -31,8 +31,8 @@ def contactUs(request):
         if username and useremail and message:
                 subject = 'Contact Us Form Submission'
                 message_body = f'Name: {username}\nEmail: {useremail}\nMessage: {message}'
-                from_email = 'agencyolma@gmail.com'
-                recipient_list = ['agencyolma@gmail.com']
+                from_email = 'olmaagency4@gmail.com'
+                recipient_list = ['olmaagency4@gmail.com']
                 send_mail(subject, message_body, from_email, recipient_list, fail_silently=False)
                 messages.success(request, 'Thank you for your message. We will get back to you soon.')
                 return redirect('ContactUs')
