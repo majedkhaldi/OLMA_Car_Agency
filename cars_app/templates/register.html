@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Styled Form</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
-    <form action="register" method="post">
-        <button>register</button>
-    </form>
+  <div class="container">
+    <div class="form">
+      <div class="title">Welcome</div>
+      <div class="subtitle">Let's create your account!</div>
+      <div class="input-container ic1">
+        <input id="name" class="input" type="text" placeholder=" " required>
+        <div class="cut"></div>
+        <label for="name" class="placeholder" >Name</label>
+      </div>
+      <div class="input-container ic2">
+        <input id="pnumber" class="input" type="text" placeholder=" " required>
+        <div class="cut"></div>
+        <label for="pnumber" class="placeholder" >Phone Number</label>
+      </div>
+      <div class="input-container ic2">
+        <input id="email" class="input" type="text" placeholder=" "  required>
+        <div class="cut cut-short"></div>
+        <label for="email" class="placeholder" >Email</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input type="password" id="password" class="input" placeholder=" "  required>
+        <div class="cut cut-short"></div>
+        <label for="Password" class="placeholder" >password</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input type="cpassword" id="cpassword" class="input" placeholder=" "  required>
+        <div class="cut cut-short"></div>
+        <label for="cPassword" class="placeholder" >Confirm password</label>
+      </div>
+
+
+
+      <button type="text" class="submit">submit</button>
+    </div>
+    <div class="drop drop-1"></div>
+    <div class="drop drop-2"></div>
+    <div class="drop drop-3"></div>
+    <div class="drop drop-4"></div>
+    <div class="drop drop-5"></div>
+  </div>
 </body>
 </html>
