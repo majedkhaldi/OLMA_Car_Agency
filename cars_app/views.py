@@ -43,11 +43,20 @@ def contactUs(request):
 
 
 def create(request):
-        
+
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
-        messages.error(request, 'Registration failed.')
-        return render(request,'register.html', {'errors': errors})
+        for name, value in errors.items():
+            messages.error(request, value, extra_tags= 'nameerror')
+        for email, value in errors.items():
+            messages.error(request, value, extra_tags= 'emailerror')
+        for pnumber, value in errors.items():
+            messages.error(request, value, extra_tags= 'phoneerror')
+        for password, value in errors.items():
+            messages.error(request, value, extra_tags= 'passworderror')
+        for cpassword, value in errors.items():
+            messages.error(request, value, extra_tags= 'cpassworderror')
+        return redirect('/registerpage')
     else:
         name = request.POST['name']
         email = request.POST['email']
