@@ -9,15 +9,15 @@
     <title>About Us - Car Agency</title>
 </head>
 <body>
-    <div class="about-top">
-        <a href="index.html">Main Page</a>
-    </div>
+    
+    <nav class="navbar">
+       <a href="/" class="nav-link"><img src="{% static 'images/pngegg-2.png' %}" alt="Home-logo"></a>
+    </nav>
     <div class="header-section">
         <div class="about-content">
             <h1>About Our Agency</h1>
             <p>Welcome to our car agency, where we specialize in offering a wide range of vehicles to meet your needs.
                 From luxury cars to family SUVs, we have something for everyone.</p>
-
             <div class="statistics">
                 <div class="stat-item">
                     <i class="fas fa-car fa-3x"></i>
@@ -62,7 +62,7 @@
                         <li><strong>Innovation</strong>: Continuously improving and embracing new technologies.</li>
                     </ul>
                 </div>
-                <img src="../images/view-city-square_1359-394.jpg.avif" alt="Company Overview">
+                <img src="../images/sean-pollock-PhYq704ffdA-unsplash.jpg" alt="Company Overview">
             </div>
             <h2 id="meet">Meet Our Team</h2>
             <div class="team">
@@ -111,7 +111,39 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Contact Us</h3>
+                <p>Car Agency</p>
+                <p>123 Main Street, Ramallah, Palestine</p>
+                <p>Email: info@caragency.com</p>
+                <p>Phone: +970 2 123 4567</p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Car Agency. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% load static %}

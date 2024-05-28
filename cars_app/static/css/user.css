@@ -6,36 +6,53 @@
 }
 
 body {
-    background-color: #f0f2f5;
+    background-image: url('../images/wallpaperflare.com_wallpaper-2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
     color: #333;
     line-height: 1.6;
 }
 
-.user-top {
-    background-color: #333;
-    padding: 15px;
-    text-align: center;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
 }
 
-.user-top a {
-    text-decoration: none;
+.navbar .logo img {
+    width: 50px;
+    border-radius: 50%;
+   border: 2px solid white;
+}
+.navbar .logo img:hover{
+border: 2px solid #ff9800;
+}
+.navbar .log {
     color: #fff;
+    text-decoration: none;
     font-size: 18px;
     font-weight: bold;
 }
 
-.user-top a:hover {
-    color: #ff9800;
+.search-container {
+    text-align: center; /* Center align the search container */
+    margin-top: 20px; /* Add margin to separate it from the navbar */
 }
 
-
-
-.log{
-    margin-left: 600px;
-
+.search-container label {
+    color: #fff;
+    margin-right: 10px;
 }
 
-
+.search-container input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
 .user-form {
     max-width: 800px;
     margin: 40px auto;
@@ -76,55 +93,167 @@ body {
     background-color: #ff9800;
 }
 
-.carsCard {
-    background-color: #fff; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-    border-radius: 10px; 
-    padding: 20px; 
-    margin: 40px auto; 
-    max-width: 300px; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    text-align: center; 
-    cursor: pointer;
+.all-cars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px auto;
+    width: 1500px;
 }
+
+.carsCard {
+    background-color: rgb(51, 51, 51, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This ensures that the button stays at the bottom */
+    flex: 1 1 300px;
+    
+}
+
 
 .carsCard img {
-    width: 100%; 
-    height: auto; 
-    border-radius: 10px; 
-    margin-bottom: 20px; 
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    height: 200px ;
+   
+    
 }
 
-.carsCard h2, .carsCard h3 {
-    color: #333; 
-    margin: 10px 0; 
+
+.carsCard h3 {
+    color: #fff;
+    margin: 4px 0;
+}
+.carsCard a {
+    text-decoration: none;
+    margin-top: 10px;
 }
 
-.carsCard input[type="submit"] {
-    background-color: #333; 
-    color: #fff; 
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 16px; 
-    transition: background-color 0.3s; 
+.carsCard button {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-.carsCard input[type="submit"]:hover {
-    background-color: #ff9800; 
-}
-
-.carsCard:hover {
-    transform: scale(1.02); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
-    background-color: #333;
-}
-.carsCard:hover h3{
+.carsCard button:hover {
+    background-color: #ff9800;
     color: #fff;
 }
 
-.carsCard:hover input{
-    background-color: #ff9800;
+.carsCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
 }
 
+.carsCard:hover h3 {
+    color: #333;
+}
+
+.carsCard:hover button {
+    background-color: #ff9800;
+    color: #fff;
+}
+.carsCard .card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    margin-right: 10%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-info, .footer-social, .footer-nav {
+    margin-bottom: 20px;
+}
+
+.footer-info h3, .footer-social h3, .footer-nav h3 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.footer-info p, .footer-nav ul, .footer-nav ul li, .footer-nav ul li a {
+    color: #fff;
+    margin: 5px 0;
+}
+
+.footer-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-nav ul li a:hover {
+    color: #ff9800;
+}
+
+.footer-social a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.5rem;
+}
+
+.footer-social a:hover {
+    color: #ff9800;
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    margin-top: 20px;
+    margin-left: 8%;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #fff;
+}
+#price_from{
+    background-color: #333;
+    color: #fff;
+    width: 100px;
+    text-align: center;
+    border-radius:10px;
+    box-shadow: 2px 2px 2px black;
+
+}
+#price_to{
+    background-color: #333;
+    color: #fff;
+    width: 70px;
+    text-align: center;
+    border-radius:10px;
+    box-shadow: 2px 2px 2px black;
+}

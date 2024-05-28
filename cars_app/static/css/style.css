@@ -9,7 +9,17 @@ body {
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }
-
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
 .background-overlay {
     position: relative;
     width: 100%;
@@ -109,7 +119,7 @@ nav {
     font-size: 20px;
     border: 1px solid black;
     box-shadow: 2px 2px 2px black;
-    background-color: rgba(197, 110, 110, 0.5);
+    background-color: rgba(208, 34, 34, 0.938);
     cursor: pointer;
     position: relative; 
     transition: background-color 0.3s; /
