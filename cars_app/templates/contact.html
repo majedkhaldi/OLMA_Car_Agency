@@ -6,14 +6,48 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
     <title>Contact Us - Car Agency</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
 </head>
+
 <body>
-    <div class="contact-top">
+    <div class="cont-top">
         <a href="/">Main Page</a>
-    </div>
+        {% if request.session.userid%}
+        <a class="log" href="logout">Logout</a>
+        {%endif%}
+    </div> <br>
+    
+<div class="CO">
+   
+    
+    <div class="container">
     <div class="contact-content">
-        <h1>Contact Us</h1>
-        <p>If you have any questions, feel free to reach out to us using the form below.</p>
+   
+        <!-- <h1>Contact Us</h1>
+        <p>If you have any questions, feel free to reach out to us using the form below.</p> -->
+        <div class="main">
+        <form method="post" action="{% url 'ContactUs' %}" class="contact-form">
+            {% csrf_token %}
+
+            <p>Contact Us</p>
+<div class="test">
+            <input type="text" id="usernameCont" name="usernameCont" placeholder="Your Name" required>
+            <input type="email" id="useremail" name="useremail" placeholder="Your Email" required>
+            <textarea id="Message" name="Message" placeholder="Your Message" required></textarea>
+        </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="drops">
+            <div class="drop drop-1"></div>
+            <div class="drop drop-2"></div>
+            <div class="drop drop-3"></div>
+            <div class="drop drop-4"></div>
+            <div class="drop drop-5"></div>
+    
+        </div>
+    </div>
+
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -21,23 +55,13 @@
             {% endfor %}
         </ul>
     {% endif %}
-        <form method="post" action="{% url 'ContactUs' %}" class="contact-form">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="usernameCont" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="useremail" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="Message" rows="5" required></textarea>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
 
-    </div>
+   
+</div>
+
+</div>
+
+
+</div>
 </body>
 </html>

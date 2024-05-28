@@ -6,42 +6,45 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/user.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% load static %}
     <script src="{% static 'js/main.js' %}"></script>
     <title>Responsive Form and Table</title>
 </head>
 <body>
     <div class="user-top">
         <a href="/">Main Page</a>
-        {% if request.session.userid%}
+        {% if request.session.userid %}
         <a class="log" href="logout">Logout</a>
-        {%endif%}
+        {% endif %}
+
+        <h1>Search Cars</h1>
+        <input type="text" id="search-input" placeholder="Search for cars...">
+        <ul id="search-results"></ul>
     </div>
     <div class="user-form">
-        <form action="process" >
+        <form action="process">
             <select name="make" id="make">
                 <option value="">--Make--</option>
                 {% for make in makes %}
-                <option value="{{make}}">{{make}}</option>
-                {%endfor%}
+                <option value="{{ make }}">{{ make }}</option>
+                {% endfor %}
             </select>
             <select name="model" id="model">
                 <option value="">--Model--</option>
                 {% for model in models %}
-                <option value="{{model}}">{{model}}</option>
-                {%endfor%}
+                <option value="{{ model }}">{{ model }}</option>
+                {% endfor %}
             </select>
             <select name="year_from" id="year_from">
                 <option value="">--Year From--</option>
                 {% for year in years %}
-                <option value="{{year}}">{{year}}</option>
-                {%endfor%}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
             </select>
             <select name="color" id="color">
                 <option value="">--Color--</option>
                 {% for color in colors %}
-                <option value="{{color}}">{{color}}</option>
-                {%endfor%}
+                <option value="{{ color }}">{{ color }}</option>
+                {% endfor %}
             </select>
             <select name="price" id="price">
                 <option>--Price--</option>
@@ -49,21 +52,81 @@
             <button type="submit">Filter</button>
         </form>
     </div>
-    <div class="all-cars"></div>
-    {%for car in cars%}
-    <div class="carsCard">
-        <img src="{{car.img}}" alt="bmw">
-        <h3>{{car.make}}</h3>
-        <h3>{{car.model}}</h3>
-        <h3>{{car.year}}</h3>
-        <h3>{{car.price}}</h3>
-        <a href="shoppingcart/{{car.id}}"><button>Add to Cart</button></a>
-        <a href="cardetails/{{car.id}}">view detail</a>
+    <div class="all-cars" id="car-list">
+        {% for car in cars %}
+        <div class="carsCard">
+            <img src="{{ car.img }}" alt="{{ car.make }}">
+            <h3>{{ car.make }}</h3>
+            <h3>{{ car.model }}</h3>
+            <h3>{{ car.year }}</h3>
+            <h3>{{ car.price }}</h3>
+            <a href="shoppingcart/{{ car.id }}"><button>Add to Cart</button></a>
+            <a href="cardetails/{{ car.id }}">View Detail</a>
+        </div>
+        {% endfor %}
     </div>
-    {%endfor%}
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% load static %}
-      <link rel="stylesheet" href="{% static 'js/main.js' %}">
+
+    <script type="text/javascript">
+       $(document).ready(function() {
+    $('#search-input').on('keyup', function() {
+        var query = $(this).val();
+        if (query.trim() === '') {
+            // If the search input is empty, fetch all cars
+            $.ajax({
+                url: "process",
+                dataType: 'json',
+                success: function(data) {
+                    $('#car-list').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        var car = data[i];
+                        $('#car-list').append(
+                            '<div class="carsCard">' +
+                            '<img src="' + car.img + '" alt="' + car.make + '">' +
+                            '<h3>' + car.make + '</h3>' +
+                            '<h3>' + car.model + '</h3>' +
+                            '<h3>' + car.year + '</h3>' +
+                            '<h3>' + car.price + '</h3>' +
+                            '<a href="shoppingcart/' + car.id + '"><button>Add to Cart</button></a>' +
+                            '<a href="cardetails/' + car.id + '">View Detail</a>' +
+                            '</div>'
+                        );
+                    }
+                }
+            });
+        } else {
+            // If there is a query, perform the search as before
+            $.ajax({
+                url: '{% url "search_cars" %}',
+                data: {
+                    'q': query
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#car-list').empty();
+                    if (data.length === 0) {
+                        $('#car-list').append('<p>No results found</p>');
+                    } else {
+                        for (var i = 0; i < data.length; i++) {
+                            var car = data[i];
+                            $('#car-list').append(
+                                '<div class="carsCard">' +
+                                '<img src="' + car.img + '" alt="' + car.make + '">' +
+                                '<h3>' + car.make + '</h3>' +
+                                '<h3>' + car.model + '</h3>' +
+                                '<h3>' + car.year + '</h3>' +
+                                '<h3>' + car.price + '</h3>' +
+                                '<a href="shoppingcart/' + car.id + '"><button>Add to Cart</button></a>' +
+                                '<a href="cardetails/' + car.id + '">View Detail</a>' +
+                                '</div>'
+                            );
+                        }
+                    }
+                }
+            });
+        }
+    });
+});
+
+    </script>
 </body>
 </html>

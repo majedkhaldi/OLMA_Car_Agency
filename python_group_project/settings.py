@@ -126,5 +126,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'olmaagency4@gmail.com'
-EMAIL_HOST_PASSWORD = 'eygv xhbz rzlg gbmw'
+EMAIL_HOST_USER = 'agencyolma@gmail.com'
+EMAIL_HOST_PASSWORD = 'oswr hxcb bbtr vbko'
