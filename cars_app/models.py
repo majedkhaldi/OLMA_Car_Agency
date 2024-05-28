@@ -77,3 +77,18 @@ class Appointment(models.Model):
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
 
+
+class Messages(models.Model):
+    message=models.TextField(max_length=45)
+    user = models.ForeignKey(User, related_name='messages',on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add = True,null=True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+class Comments(models.Model):
+    comment=models.TextField(max_length=45)
+    user = models.ForeignKey(User,related_name='comments' ,on_delete=models.CASCADE,null=True)
+    message = models.ForeignKey(Messages, related_name='comments',on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add = True,null=True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+
