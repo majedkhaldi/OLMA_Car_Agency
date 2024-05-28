@@ -66,7 +66,7 @@ class Order(models.Model):
     user = models.ForeignKey (User,on_delete= models.CASCADE)
     total_amount = models.PositiveIntegerField()
     total_price = models.PositiveIntegerField()
-    status = models.CharField(max_length=45)
+    status = models.CharField(max_length=45, default= "pending")
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
 
@@ -78,10 +78,10 @@ class Appointment(models.Model):
     updated_at = models.DateTimeField(auto_now =True)
 
 class Messages(models.Model):
-        message=models.TextField(max_length=45)
-        user = models.ForeignKey(User, related_name='messages',on_delete=models.CASCADE,null=True)
-        created_at = models.DateTimeField(auto_now_add = True,null=True)
-        updated_at = models.DateTimeField(auto_now = True)
+    message=models.TextField(max_length=45)
+    user = models.ForeignKey(User, related_name='messages',on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add = True,null=True)
+    updated_at = models.DateTimeField(auto_now = True)
 
 class Comments(models.Model):
     comment=models.TextField(max_length=45)

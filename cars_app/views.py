@@ -171,36 +171,83 @@ def addtocart(request, C_id):
     return redirect('shoppingcart')
 
 
+import logging
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from .models import User, Cart, Order
+
+# Configure logging
+logger = logging.getLogger(__name__)
+
+@login_required
 def checkout(request):
     if 'userid' not in request.session:
         return redirect('login')
+        
     user = User.objects.get(id=request.session['userid'])
     cart = Cart.objects.get(user=user)
-    cars_in_cart = cart.cars.all()
-    this_order = Order.objects.create(user = user, total_amount = request.session['total_quantity'], total_price = cart.total_price)
-    for car in cars_in_cart:
-        this_order.cars.add(car)
-    # if 'quantity_ordered' not in request.session:
-    #         request.session['quantity_ordered'] = 0
-    # else:
-    #         for car in cars_in_cart:
-    #             request.session['quantity_ordered'] += 1
+    
+    if not cart.cars.exists():
+        logger.warning(f'Cart is empty for user {user.id}')
+        return redirect('shoppingcart')
+    
+    total_quantity = request.session.get('total_quantity', 0)
+    if total_quantity == 0:
+        logger.warning(f'No items in cart to checkout for user {user.id}')
+        return redirect('shoppingcart')
 
+    try:
+        this_order = Order.objects.create(
+            user=user,
+            total_amount=total_quantity,
+            total_price=cart.total_price
+        )
 
-    # if 'total_amount' not in request.session:
-    #         request.session['total_amount'] = 0
-    # else:
-    #         for car in cars_in_cart:
-    #             request.session['total_amount'] += car.price
+        for car in cart.cars.all():
+            this_order.cars.add(car)
 
-    # for car in cars_in_cart:
-    #     Order.objects.create(
-    #         car=car,user=request.user,price=car.price,date=date.today(),status='Pending')
-    #     cart.delete() 
-    del request.session['total_amount']
-        # del request.session['quantity_ordered']
-        # messages.error(request, 'Your items have been added to the order.\n We will contact you soon.')
+        # Clear the total amount from the session
+        request.session.pop('total_amount', None)
+        request.session.pop('total_quantity', None)
+
+        logger.info(f'Order {this_order.id} created for user {user.id}')
+    except Exception as e:
+        logger.error(f'Error creating order for user {user.id}: {e}')
+        return redirect('shoppingcart')
+
     return redirect('shoppingcart')
+
+
+# def checkout(request):
+#     if 'userid' not in request.session:
+#         return redirect('login')
+#     user = User.objects.get(id=request.session['userid'])
+#     cart = Cart.objects.get(user=user)
+#     cars_in_cart = cart.cars.all()
+#     this_order = Order.objects.create(user = user, total_amount = request.session['total_quantity'], total_price = cart.total_price)
+#     for car in cars_in_cart:
+#         this_order.cars.add(car)
+#     # if 'quantity_ordered' not in request.session:
+#     #         request.session['quantity_ordered'] = 0
+#     # else:
+#     #         for car in cars_in_cart:
+#     #             request.session['quantity_ordered'] += 1
+
+
+#     # if 'total_amount' not in request.session:
+#     #         request.session['total_amount'] = 0
+#     # else:
+#     #         for car in cars_in_cart:
+#     #             request.session['total_amount'] += car.price
+
+#     # for car in cars_in_cart:
+#     #     Order.objects.create(
+#     #         car=car,user=request.user,price=car.price,date=date.today(),status='Pending')
+#     #     cart.delete() 
+#     del request.session['total_amount']
+#         # del request.session['quantity_ordered']
+#         # messages.error(request, 'Your items have been added to the order.\n We will contact you soon.')
+#     return redirect('shoppingcart')
 
 
 def chre(request):
