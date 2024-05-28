@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <title>Contact Us - Car Agency</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
+</head>
+
+<body>
+    <div class="cont-top">
+        <a href="/">Main Page</a>
+        {% if request.session.userid%}
+        <a class="log" href="logout">Logout</a>
+        {%endif%}
+    </div> <br>
+    
+<div class="CO">
+   
+    
+    <div class="container">
+    <div class="contact-content">
+        {% if messages %}
+        <ul class="messages" style="margin-top: -100px;">
+            {% for message in messages %}
+                <li {% if message.tags == "soldout" %} 
+                {{message}}
+                {% endif %}></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        <p>If you have any questions, feel free to reach out to us using the form below.</p>
+        <div class="main">
+        <form method="post" action="{% url 'ContactUs' %}" class="contact-form">
+            {% csrf_token %}
+
+            <p>Contact Us</p>
+<div class="test">
+            <input type="text" id="usernameCont" name="usernameCont" placeholder="Your Name" required>
+            <input type="email" id="useremail" name="useremail" placeholder="Your Email" required>
+            <textarea id="Message" name="Message" placeholder="Your Message" required></textarea>
+        </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="drops">
+            <div class="drop drop-1"></div>
+            <div class="drop drop-2"></div>
+            <div class="drop drop-3"></div>
+            <div class="drop drop-4"></div>
+            <div class="drop drop-5"></div>
+    
+        </div>
+    </div>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+   
+</div>
+
+</div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: url('../images/R4.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 10px 20px;
+    z-index: 1000;
+    text-align: left;
+}
+nav img{
+    width: 3%;
+    border-radius: 50%;
+    border: 1px solid ;
+    color: white;
+    cursor: pointer;
+
+}
+nav img:hover{
+
+    color: #ff9800;
+}
+.navbar .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+}
+
+.navbar .nav-link:hover {
+    color: #ff9800;
+}
+
+.header-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.about-content h1 {
+    color: #ff9800;
+    margin-bottom: 20px;
+}
+
+.statistics {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item i {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.stat-item h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.additional-content {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+.additional-content h2{
+    text-align: center;
+}
+.company-overview,
+.team,
+.services,
+.why-choose-us,
+.testimonials {
+    margin-bottom: 40px;
+}
+/* .additional-content .team h2{
+    text-align: center;
+} */
+.company-overview img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.company-overview h2,
+.company-overview h3,
+.team h2,
+.services h2,
+.why-choose-us h2,
+.testimonials h2 {
+    color: #ff9800;
+    margin-bottom: 20px;
+}
+
+.team {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+}
+
+.team-member {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    margin: 10px;
+    text-align: center;
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.company-overview p,
+.company-overview ul,
+.team-member p,
+.services ul,
+.why-choose-us ul,
+.testimonials p {
+    margin-bottom: 20px;
+}
+
+.company-overview ul,
+.services ul,
+.why-choose-us ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.company-overview ul li,
+.services ul li,
+.why-choose-us ul li {
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    margin-top: 40px;
+}
+
+
+#meet{
+    color:#ff9800 ;
+}
+
+
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    margin-right: 10%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-info, .footer-social, .footer-nav {
+    margin-bottom: 20px;
+}
+
+.footer-info h3, .footer-social h3, .footer-nav h3 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.footer-info p, .footer-nav ul, .footer-nav ul li, .footer-nav ul li a {
+    color: #fff;
+    margin: 5px 0;
+}
+
+.footer-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-nav ul li a:hover {
+    color: #ff9800;
+}
+
+.footer-social a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.5rem;
+}
+
+.footer-social a:hover {
+    color: #ff9800;
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    margin-top: 20px;
+    margin-left: 8%;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #fff;
+}

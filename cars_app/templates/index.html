@@ -10,6 +10,7 @@
 
 </head>
 <body>
+    <video src="https://videos.pexels.com/video-files/6872081/6872081-uhd_3840_2160_25fps.mp4" autoplay muted loop></video>
     <div class="background-overlay">
         <nav>
             <ul class="navbar">
@@ -17,13 +18,16 @@
                 <li><a href="faqs">FAQs</a></li>
                 <li><a href="aboutus">About Us</a></li>
                 <li><a href="contactus">Contact Us</a></li>
+                {% if request.session.userid%}
+                <li><a href="logout">logout</a></li>
+                {%endif%}
             </ul>
         </nav>
 
         <div class="all-header-contents">
             <div class="header-content">
                 <h1>Unlock Your Journey, Drive Uniqueness</h1>
-                <a href="cars"><button class="btn">Take a Journey</button></a>
+                <a href="process"><button class="btn">Take a Journey</button></a>
             </div>
         </div>
     </div>
