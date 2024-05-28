@@ -2,7 +2,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import User, Order, Cart, Car
+from .models import User, Order, Cart, Car,Messages,Comments
 from datetime import date
 import bcrypt
 from django.template.loader import render_to_string
@@ -231,3 +231,24 @@ def search_cars(request):
             cars = Car.objects.none() 
         car_list = list(cars.values('id', 'make', 'model', 'year', 'price', 'img', 'color'))
         return JsonResponse(car_list, safe=False)
+    
+def review(request):
+        data={
+            'messages':Messages.objects.all()
+    }
+        return render(request,'review.html',data)
+
+
+def create_message(request,x):
+    message=request.POST['message']
+    user=User.objects.get(id=x)
+    Messages.objects.create(message=message,user=user)
+    return redirect('/review')
+
+def create_comment(request,x,w):
+    comment=request.POST['comment']
+    user=User.objects.get(id=w)
+    messages=Messages.objects.get(id=x)
+    Comments.objects.create(comment=comment,user=user,message=messages)
+    return redirect('/review')
+
