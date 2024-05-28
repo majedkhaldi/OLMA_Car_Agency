@@ -135,17 +135,19 @@ nav img:hover{
 
 .team-member {
     flex: 1;
-    min-width: 200px;
+    min-width: 150;
     max-width: 250px;
     margin: 10px;
     text-align: center;
 }
 
 .team-member img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
     margin-bottom: 10px;
+    text-align: center;
+    border: 2px solid #ff9800;
 }
 
 .company-overview p,
@@ -186,7 +188,7 @@ footer {
     padding: 20px 0;
     width: 100%;
     text-align: center;
-    margin-right: 10%;
+    margin-right: 8%;
 }
 
 .footer-container {
