@@ -62,10 +62,10 @@ class Car(models.Model):
 
 
 class Order(models.Model):
-    car = models.ForeignKey(Car,on_delete= models.CASCADE)
+    cars = models.ManyToManyField(Car,related_name='orders')
     user = models.ForeignKey (User,on_delete= models.CASCADE)
     total_amount = models.PositiveIntegerField()
-    date = models.DateField()
+    total_price = models.PositiveIntegerField()
     status = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
