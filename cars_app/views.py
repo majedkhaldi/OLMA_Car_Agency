@@ -2,7 +2,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import User, Order, Cart, Car,Messages,Comments
+from .models import User, Order, Cart, Car
 from datetime import date
 import bcrypt
 from django.template.loader import render_to_string
@@ -31,7 +31,6 @@ def contactUs(request):
         username = request.POST.get('usernameCont')
         useremail = request.POST.get('useremail')
         message = request.POST.get('Message')
-
         if username and useremail and message:
             subject = 'Contact Us Form Submission'
             context = {'username': username, 'useremail': useremail, 'message': message}
@@ -43,6 +42,12 @@ def contactUs(request):
             return redirect('ContactUs')
         else:
             messages.error(request, 'All fields are required.')
+    else:
+        if 'flag' in request.session:
+            messages.success(request, 'Please contact us to place an order for this car',extra_tags= "soldout")
+        else:
+            return render(request, 'contact.html')
+    del request.session['flag']
     return render(request, 'contact.html')
 
 
@@ -125,31 +130,85 @@ def cars_page(request):
 
     return render(request,"cars.html",data)
 
-
-
 def car_detail(request, c_id):
     car =Car.objects.get(id=c_id) 
     return render(request, 'car_details.html', {'car': car})
 
-
 def shoppingCart(request):
     if 'userid' not in request.session:
         return redirect('Login')
+    
     user = User.objects.get(id=request.session['userid'])
     cart = Cart.objects.get(user=user)
-    if 'total_quantity' not in request.session:
-        request.session['total_quantity'] = 0
-    if request.method == 'POST':
-        for car in cart.cars.all():
-            quantity_key = 'quantity_{}'.format(car.id)
-            if quantity_key in request.POST:
-                quantity = int(request.POST[quantity_key])
-                request.session['total_quantity'] += quantity
-                cart.total_price += quantity * car.price
-    return render(request,'addTocard.html',{'cart': cart, 'total_quantity': request.session['total_quantity']})
+    total_quantity = 0
+    total_price = 0
+
+
+    for car in cart.cars.all():
+        total_price += car.price
+        total_quantity += 1
+
+
+            # Update cart total price and total quantity
+    # cart.total_price = total_price
+    # request.session['total_quantity'] = total_quantity
+    # cart.save()
+
+    return render(request, 'addTocard.html', {'cart': cart, 'total_quantity': total_quantity, 'total_price': total_price})
+
+
+# def shoppingCart(request):
+#     if 'userid' not in request.session:
+#         return redirect('Login')
+    
+#     user = User.objects.get(id=request.session['userid'])
+#     cart = Cart.objects.get(user=user)
+    
+#     request.session['total_quantity'] = 0
+#     total_price = 0
+    
+#     for car in cart.cars.all():
+#         quantity_key = 'quantity_{}'.format(car.id)
+#         print(request.POST)
+#         if quantity_key in request.POST:
+#             quantity = int(request.POST[quantity_key])
+#             request.session['total_quantity'] += quantity
+#             total_price += (quantity * car.price)
+
+#     # Update session with total quantity
+#     # request.session['total_quantity'] = request.session['total_quantity']
+#     cart.total_price = total_price
+
+#     cart.save()
+    
+#     return render(request, 'addTocard.html', {'cart':cart,'total_quantity': request.session['total_quantity'], 'total_price': total_price})
+
+
+
+# def shoppingCart(request):
+#     if 'userid' not in request.session:
+#         return redirect('Login')
+#     user = User.objects.get(id=request.session['userid'])
+#     cart = Cart.objects.get(user=user)
+#     if 'total_quantity' not in request.session:
+#         request.session['total_quantity'] = 0
+
+#     # if request.method == 'POST':
+#     for car in cart.cars.all():
+#         quantity_key = 'quantity_{}'.format(car.id)
+#         if quantity_key in request.POST:
+#             quantity = int(request.POST[quantity_key])
+#             request.session['total_quantity'] += quantity
+#             cart.total_price += (quantity * car.price)
+    
+#     # print(quantity)
+
+#     return render(request,'addTocard.html',{'cart': cart, 'total_quantity': request.session['total_quantity']})
 
 
 def addtocart(request, C_id):
+    if 'userid' not in request.session:
+        return redirect('Login')
     user = User.objects.get(id=request.session['userid'])
     car = Car.objects.get(id=C_id)
     cart = Cart.objects.get(user=user)
@@ -169,39 +228,34 @@ def addtocart(request, C_id):
 def checkout(request):
     if 'userid' not in request.session:
         return redirect('login')
+    
     user = User.objects.get(id=request.session['userid'])
     cart = Cart.objects.get(user=user)
     cars_in_cart = cart.cars.all()
-    this_order = Order.objects.create(user = user, total_amount = request.session['total_quantity'], total_price = cart.total_price)
+    
+    total_quantity = 0
+    total_price = 0.0
+
+    if request.method == 'POST':
+        for car in cars_in_cart:
+            car_id = str(car.id)
+            if car_id in request.POST:
+                quantity = int(request.POST[car_id])
+                total_quantity += quantity
+                total_price += (quantity * car.price)
+
+    this_order = Order.objects.create(user=user, total_amount=total_quantity, total_price=total_price, status='pending')
     for car in cars_in_cart:
         this_order.cars.add(car)
 
+    cart.cars.clear() 
+    cart.total_quantity = 0
+    cart.total_price = 0.0
+    cart.save()
 
+    messages.success(request, 'Your items have been added to the order. We will contact you soon.')
+    return redirect('shoppingcart')
 
-
-
-
-    if 'quantity_ordered' not in request.session:
-            request.session['quantity_ordered'] = 0
-    else:
-            for car in cars_in_cart:
-                request.session['quantity_ordered'] += 1
-
-
-    if 'total_amount' not in request.session:
-            request.session['total_amount'] = 0
-    else:
-            for car in cars_in_cart:
-                request.session['total_amount'] += car.price
-
-    for car in cars_in_cart:
-        Order.objects.create(
-            car=car,user=request.user,price=car.price,date=date.today(),status='Pending')
-        cart.delete() 
-        del request.session['total_amount']
-        del request.session['quantity_ordered']
-        messages.error(request, 'Your items have been added to the order.\n We will contact you soon.')
-        return redirect('chre')
 
 
 def chre(request):
@@ -232,23 +286,20 @@ def search_cars(request):
         car_list = list(cars.values('id', 'make', 'model', 'year', 'price', 'img', 'color'))
         return JsonResponse(car_list, safe=False)
     
-def review(request):
-        data={
-            'messages':Messages.objects.all()
-    }
-        return render(request,'review.html',data)
+def all_cars(request):
+    cars = Car.objects.all()
+    cars_list = list(cars.values('id', 'make', 'model', 'year', 'price', 'img'))
+    return JsonResponse(cars_list, safe=False)
+    
 
+def removeitem(request,c_id):
+    user = User.objects.get(id=request.session['userid'])
+    cart = Cart.objects.get(user=user)
+    this_car = Car.objects.get(id = c_id)
+    cart.cars.remove(this_car)
+    return redirect('/cart')
 
-def create_message(request,x):
-    message=request.POST['message']
-    user=User.objects.get(id=x)
-    Messages.objects.create(message=message,user=user)
-    return redirect('/review')
-
-def create_comment(request,x,w):
-    comment=request.POST['comment']
-    user=User.objects.get(id=w)
-    messages=Messages.objects.get(id=x)
-    Comments.objects.create(comment=comment,user=user,message=messages)
-    return redirect('/review')
-
+def soldout (request):
+    if 'flag' not in request.session:
+        request.session['flag'] = 1
+    return redirect ('ContactUs')
