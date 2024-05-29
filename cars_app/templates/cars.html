@@ -27,7 +27,7 @@
         {% endif %}
     </div>
 
-    <div><img src="" alt=""></div>
+    <!-- <div><img src="../static/images/logo1.png" alt="Logo" id="logo"></div> -->
 
     <div class="search-container">
         <label for="search">Search</label>
@@ -81,7 +81,11 @@
             <h3>{{ car.year }}</h3>
             <h3>{{ car.price }}</h3>
             <div class="card-actions">
-                <a href="shoppingcart/{{ car.id }}"><button>Add to Cart</button></a>
+            {% if car.inventory > 0%}
+            <a href="shoppingcart/{{ car.id }}"><button>Add to Cart</button></a>
+            {% else %}
+            <a href="soldout"><button style="background-color: black; color: aliceblue;">Sold Out</button></a>
+            {% endif %}
                 <a href="cardetails/{{ car.id }}">View Details >></a>
             </div>
         </div>
@@ -120,46 +124,17 @@
         </footer>
     
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
-                var query = $(this).val();
-                if (query.trim() === '') {
-                    // If the search input is empty, fetch all cars
-                    $.ajax({
-                        url: "process",
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#car-list').empty();
-                            for (var i = 0; i < data.length; i++) {
-                                var car = data[i];
-                                $('#car-list').append(
-                                    '<div class="carsCard">' +
-                                    '<img src="' + car.img + '" alt="' + car.make + '">' +
-                                    '<h3>' + car.make + '</h3>' +
-                                    '<h3>' + car.model + '</h3>' +
-                                    '<h3>' + car.year + '</h3>' +
-                                    '<h3>' + car.price + '</h3>' +
-                                    '<a href="shoppingcart/' + car.id + '"><button>Add to Cart</button></a>' +
-                                    '<a href="cardetails/' + car.id + '">View Detail</a>' +
-                                    '</div>'
-                                );
-                            }
-                        }
-                    });
-                } else {
-                    // If there is a query, perform the search as before
-                    $.ajax({
-                        url: '{% url "search_cars" %}',
-                        data: {
-                            'q': query
-                        },
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#car-list').empty();
-                            if (data.length === 0) {
-                                $('#car-list').append('<p>No results found</p>');
-                            } else {
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#search-input').on('keyup', function() {
+                    var query = $(this).val().trim();
+                    if (query === '') {
+                        // If the search input is empty, fetch all cars
+                        $.ajax({
+                            url: '{% url "all_cars" %}', // Update this with the correct URL for fetching all cars
+                            dataType: 'json',
+                            success: function(data) {
+                                $('#car-list').empty();
                                 for (var i = 0; i < data.length; i++) {
                                     var car = data[i];
                                     $('#car-list').append(
@@ -175,11 +150,40 @@
                                     );
                                 }
                             }
-                        }
-                    });
-                }
+                        });
+                    } else {
+                        // If there is a query, perform the search as before
+                        $.ajax({
+                            url: '{% url "search_cars" %}',
+                            data: {
+                                'q': query
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                $('#car-list').empty();
+                                if (data.length === 0) {
+                                    $('#car-list').append('<p>No results found</p>');
+                                } else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        var car = data[i];
+                                        $('#car-list').append(
+                                            '<div class="carsCard">' +
+                                            '<img src="' + car.img + '" alt="' + car.make + '">' +
+                                            '<h3>' + car.make + '</h3>' +
+                                            '<h3>' + car.model + '</h3>' +
+                                            '<h3>' + car.year + '</h3>' +
+                                            '<h3>' + car.price + '</h3>' +
+                                            '<a href="shoppingcart/' + car.id + '"><button>Add to Cart</button></a>' +
+                                            '<a href="cardetails/' + car.id + '">View Detail</a>' +
+                                            '</div>'
+                                        );
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 </html>
