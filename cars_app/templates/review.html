@@ -4,11 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">    
+    <script src="{% static 'main.js' %}"></script>
 </head>
 <body>
-    <div>
-        welcome:{{request.session.name}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+    welcome:{{request.session.name}}
+
+    <div class="container">
+        <div class="slideshow">
+            <ul class="slides">
+                <li class="slide"><img src="https://th.bing.com/th/id/OIP.gZ2Q185cDRCEyFyw6jcvjAHaE7?w=1280&h=853&rs=1&pid=ImgDetMain" alt="" /></li>
+                <li class="slide"><img src="https://th.bing.com/th/id/OIP.2AIDhvTAy0iuNgH4MYxtRQHaE7?w=800&h=533&rs=1&pid=ImgDetMain" alt="" /></li>
+                <li class="slide"><img src="https://i.ebayimg.com/00/s/NzY4WDEwMjQ=/z/IAkAAOSwhfZdXOVR/$_86.JPG" alt="" /></li>
+                <li class="slide"><img src="https://smgmedia.blob.core.windows.net/images/113524/1024/bmw-335d-estate-329594245954.jpg" alt="" /></li>
+                <li class="slide"><img src="https://f7432d8eadcf865aa9d9-9c672a3a4ecaaacdf2fee3b3e6fd2716.ssl.cf3.rackcdn.com/C2553/U499/IMG_18395-large.jpg" alt="" /></li>
+            </ul>
+        </div>
+      
+        <ul class="thumbnails">
+            <li>
+                <a href="#slide1"><img src="https://th.bing.com/th/id/OIP.gZ2Q185cDRCEyFyw6jcvjAHaE7?w=1280&h=853&rs=1&pid=ImgDetMain" /></a>
+            </li>
+            <li>
+                <a href="#slide2"><img src="https://th.bing.com/th/id/OIP.2AIDhvTAy0iuNgH4MYxtRQHaE7?w=800&h=533&rs=1&pid=ImgDetMain" /></a>
+            </li>
+            <li>
+                <a href="#slide3"><img src="https://i.ebayimg.com/00/s/NzY4WDEwMjQ=/z/IAkAAOSwhfZdXOVR/$_86.JPG" /></a>
+            </li>
+            <li>
+                <a href="#slide4"><img src="https://smgmedia.blob.core.windows.net/images/113524/1024/bmw-335d-estate-329594245954.jpg" /></a>
+            </li>
+            <li>
+                <a href="#slide5"><img src="https://f7432d8eadcf865aa9d9-9c672a3a4ecaaacdf2fee3b3e6fd2716.ssl.cf3.rackcdn.com/C2553/U499/IMG_18395-large.jpg" /></a>
+            </li>
+        </ul>
     </div>
+
+
     <form action="/message/{{request.session.userid}}" method="POST">
         {% csrf_token %}
         
@@ -18,16 +55,28 @@
     </form>
     {% for i in message %}
 
-    {{i.message}}
+    {{i.users.name}}{{i.message}}
      {%for comment in i.comments.all %}
     {{comment.comment}}
     {% endfor %}
     <form action="/create_comment/{{i.id}}/{{request.session.userid}}" method="POST">
         {% csrf_token %}
-        <label for="">Post a Comment</label>
-        <input type="textarea" name="comment">
-        <button type="submit">Add a comment</button>
+        <div class="vomment-box">
+            <label for="">Post a Comment</label>
+            <input  id="comment" rows="4" cols="50" placeholder="Add your comment here" name="comment">
+            <button type="submit">Add a comment</button>
+        </div>
+    
     </form>
     {% endfor %}
+
+    <ul class="details">
+        <li>Color: {{car.color}}</li>
+        <li>Make: {{car.make}}</li>
+        <li>Year:{{car.year}}</li>
+        <li>Model: {{car.model}}</li>
+        <li>Price: {{car.price}}</li>
+    </ul>
+
 </body>
 </html>
