@@ -16,6 +16,7 @@ body {
     min-height: 100vh;
     padding: 20px;
 }
+
 .navbar {
     position: fixed;
     top: 0;
@@ -23,29 +24,42 @@ body {
     background-color: rgba(0, 0, 0, 0.9);
     padding: 10px 20px;
     z-index: 1000;
-    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
 }
-nav img{
-    width: 3%;
+
+.navbar .nav-link img {
+    width: 10%;
     border-radius: 50%;
-    border: 1px solid ;
-    color: white;
     cursor: pointer;
-
 }
-nav img:hover{
 
-    color: #ff9800;
+.navbar #logoo {
+    width: 15%;
 }
-.navbar .nav-link {
-    color: #fff;
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin-right: 280px;
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
+    color: white;
     text-decoration: none;
-    font-size: 1.2rem;
-    padding: 10px 20px;
+    font-size: 18px;
 }
 
-.navbar .nav-link:hover {
+.nav-links a:hover {
     color: #ff9800;
+    background-color: #fff;
 }
 
 .header-section {
@@ -97,9 +111,11 @@ nav img:hover{
     border-radius: 10px;
     text-align: center;
 }
-.additional-content h2{
+
+.additional-content h2 {
     text-align: center;
 }
+
 .company-overview,
 .team,
 .services,
@@ -107,9 +123,7 @@ nav img:hover{
 .testimonials {
     margin-bottom: 40px;
 }
-/* .additional-content .team h2{
-    text-align: center;
-} */
+
 .company-overview img {
     width: 100%;
     height: auto;
@@ -129,13 +143,13 @@ nav img:hover{
 
 .team {
     display: flex;
-    /* flex-wrap: wrap; */
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .team-member {
     flex: 1;
-    min-width: 150;
+    min-width: 150px;
     max-width: 250px;
     margin: 10px;
     text-align: center;
@@ -176,11 +190,9 @@ nav img:hover{
     margin-top: 40px;
 }
 
-
-#meet{
-    color:#ff9800 ;
+#meet {
+    color: #ff9800;
 }
-
 
 footer {
     background-color: rgba(0, 0, 0, 0.9);
@@ -199,16 +211,23 @@ footer {
     margin: 0 auto;
 }
 
-.footer-info, .footer-social, .footer-nav {
+.footer-info,
+.footer-social,
+.footer-nav {
     margin-bottom: 20px;
 }
 
-.footer-info h3, .footer-social h3, .footer-nav h3 {
+.footer-info h3,
+.footer-social h3,
+.footer-nav h3 {
     color: #ff9800;
     margin-bottom: 10px;
 }
 
-.footer-info p, .footer-nav ul, .footer-nav ul li, .footer-nav ul li a {
+.footer-info p,
+.footer-nav ul,
+.footer-nav ul li,
+.footer-nav ul li a {
     color: #fff;
     margin: 5px 0;
 }
@@ -247,4 +266,123 @@ footer {
 .footer-bottom p {
     margin: 0;
     color: #fff;
+}
+
+/* Media Queries */
+
+/* For tablets and small desktops */
+@media screen and (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin-right: 0;
+    }
+
+    .navbar .nav-link img,
+    .navbar #logoo {
+        width: 20%;
+    }
+
+    .header-section {
+        margin-top: 120px;
+    }
+}
+
+/* For tablets and small screens */
+@media screen and (max-width: 768px) {
+    .navbar .nav-link img,
+    .navbar #logoo {
+        width: 25%;
+    }
+
+    .statistics {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-item h2 {
+        font-size: 2rem;
+    }
+
+    .team-member img {
+        width: 120px;
+        height: 120px;
+        border-width: 1px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-info,
+    .footer-social,
+    .footer-nav {
+        margin-bottom: 30px;
+    }
+}
+
+/* For smartphones and small devices */
+@media screen and (max-width: 576px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        height: auto;
+    }
+
+    .navbar .nav-link img,
+    .navbar #logoo {
+        width: 30%;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-right: 0;
+    }
+
+    .header-section {
+        margin-top: 150px;
+    }
+
+    .about-content {
+        padding: 10px;
+    }
+
+    .statistics {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-item h2 {
+        font-size: 1.5rem;
+    }
+
+    .team-member img {
+        width: 100px;
+        height: 100px;
+        border-width: 1px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-info,
+    .footer-social,
+    .footer-nav {
+        margin-bottom: 30px;
+    }
+
+    .footer-bottom {
+        margin: 0;
+    }
 }

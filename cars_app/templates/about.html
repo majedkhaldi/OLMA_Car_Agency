@@ -11,8 +11,18 @@
 <body>
     
     <nav class="navbar">
-       <a href="/" class="nav-link"><img src="{% static 'images/pngegg-2.png' %}" alt="Home-logo"></a>
+        <a href="/" class="nav-link"><img src="{% static 'images/pngegg-2.png' %}" alt="Home-logo" id="home-logo"></a>
+        <ul class="nav-links">
+            <li><a href="loginpage">User</a></li>
+            <li><a href="faqs">FAQs</a></li>
+            <li><a href="contactus">Contact Us</a></li>
+            {% if request.session.userid %}
+                <li><a href="logout">Logout</a></li>
+            {% endif %}
+        </ul>
+        <img src="{% static 'images/logo1.png' %}" alt="Logo" id="logoo">
     </nav>
+
     <div class="header-section">
         <div class="about-content">
             <h1>About Our Agency</h1>
