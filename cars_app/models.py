@@ -62,11 +62,23 @@ class Car(models.Model):
 
 
 class Order(models.Model):
+<<<<<<< HEAD
+    STATUS_CHOICES = [
+    ('pending', 'Pending'),
+    ('completed', 'Completed'),
+    ('cancelled', 'Cancelled'),
+    ]
+=======
+>>>>>>> master
     cars = models.ManyToManyField(Car,related_name='orders')
     user = models.ForeignKey (User,on_delete= models.CASCADE)
     total_amount = models.PositiveIntegerField()
     total_price = models.PositiveIntegerField()
+<<<<<<< HEAD
+    status = models.CharField(max_length=45, choices=STATUS_CHOICES)
+=======
     status = models.CharField(max_length=45)
+>>>>>>> master
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
 
@@ -77,10 +89,22 @@ class Appointment(models.Model):
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
 
+<<<<<<< HEAD
+class CarImage(models.Model):
+    car = models.ForeignKey(Car, related_name='images', on_delete=models.CASCADE)
+    image_url = models.URLField()
+    created_at = models.DateTimeField(auto_now_add =True)
+    updated_at = models.DateTimeField(auto_now =True)
+=======
+>>>>>>> master
 
 class Messages(models.Model):
     message=models.TextField(max_length=45)
     user = models.ForeignKey(User, related_name='messages',on_delete=models.CASCADE,null=True)
+<<<<<<< HEAD
+    car = models.ForeignKey(Car, related_name='messages',on_delete=models.CASCADE,null=True)
+=======
+>>>>>>> master
     created_at = models.DateTimeField(auto_now_add = True,null=True)
     updated_at = models.DateTimeField(auto_now = True)
 
@@ -90,5 +114,8 @@ class Comments(models.Model):
     message = models.ForeignKey(Messages, related_name='comments',on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now_add = True,null=True)
     updated_at = models.DateTimeField(auto_now = True)
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> master

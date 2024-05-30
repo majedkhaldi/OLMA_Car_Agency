@@ -8,6 +8,21 @@ body {
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    background-size: cover;
 }
 video {
     position: fixed;
@@ -49,7 +64,19 @@ nav {
     overflow: hidden;
     display: flex;
     align-items: center;
+<<<<<<< HEAD
+    height: 80px;
+    width: 100%;
+    padding: 0 20px;
+    justify-content: center;
+}
+
+nav img{
+    width: 16rem;
+    height: auto;
+=======
     height: 50px;
+>>>>>>> master
 }
 
 nav img{
@@ -57,31 +84,42 @@ nav img{
 
 }
 .navbar {
+
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: auto;
     display: flex;
-    margin-left: 8%;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
 }
 
 .navbar li {
+<<<<<<< HEAD
+    margin: 4px;
+    width:200px;
+    margin: auto;
+=======
     float: left;
     width: 12.5%;
     padding: 1%;
+>>>>>>> master
 }
 
 .navbar li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 20px;
+    padding: 10px 15px;
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: bold;
+<<<<<<< HEAD
+    cursor: pointer;
+=======
     width: 150px;
 
+>>>>>>> master
 }
 
 .navbar li a:hover {
@@ -89,8 +127,27 @@ nav img{
     color: black;
 }
 
+#logout {
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid black;
+}
+
+#logout:hover {
+    color: white;
+    background-color: rgb(182, 30, 30);
+    box-shadow: 5px 5px 5px black;
+    border-radius: 25px;
+    border: 1px solid black;
+}
+
+.navbar li img {
+    width: 25px;
+}
+
 .header-content {
-    margin-top: 10%;
+    margin-top: 20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -98,15 +155,22 @@ nav img{
     text-align: center;
     position: relative;
     z-index: 2;
+<<<<<<< HEAD
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 10px black;
+    padding: 30px;
+=======
     background-color: rgba(0,0,0,0.3);
     box-shadow: 2px 2px 10px black;
+>>>>>>> master
     
 }
 
 .all-header-contents {
+    padding: 30px;
     margin-top: 4%;
     place-items: center;
-    width: 40%;
+    width:40%;
     height: 500px;
     margin: auto;
     width: 60vmin;
@@ -123,8 +187,14 @@ nav img{
     font-size: 50px;
     font-weight: bold;
     text-align: center;
+<<<<<<< HEAD
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+=======
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Add text shadow */
 }
+>>>>>>> master
 .header-content h1 span {
     position: relative;
     display: inline-block;
@@ -148,21 +218,63 @@ nav img{
 }
 
 .header-content button:hover {
+<<<<<<< HEAD
+    background-color: #ffcc80;
+=======
     background-color: #ffcc80; /* Change the hover background color */
+>>>>>>> master
     color: black;
     transform: scale(1.1);
 }
 
-@media screen and (max-width: 600px) {
-    .navbar {
-        flex-direction: column;
-    }
-
-    .navbar li {
-        float: none;
+@media screen and (max-width: 1200px) {
+    .navbar li a {
+        font-size: 16px;
+        padding: 8px 12px;
     }
 }
 
+@media screen and (max-width: 768px) {
+    nav img {
+        width: 100px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .navbar li {
+        width: 100%;
+    }
+
+    .navbar li a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+<<<<<<< HEAD
+@media screen and (max-width: 480px) {
+    .header-content h1 {
+        font-size: 36px;
+    }
+
+    .header-content button {
+        width: 250px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.4);
+    color: white;
+    padding: 20px 0;
+=======
 body {
     position: relative; 
     min-height: 100vh; 
@@ -175,6 +287,7 @@ footer {
     background-color: rgba(51, 51, 51,0.4); 
     color: white;
     padding: 20px 0; 
+>>>>>>> master
     text-align: center;
     z-index: 2;
 }
@@ -185,12 +298,40 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+<<<<<<< HEAD
+    flex-wrap: wrap;
+=======
+>>>>>>> master
 }
 
 .footer-links {
     list-style: none;
     padding: 0;
     margin: 0;
+<<<<<<< HEAD
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+=======
+}
+
+.footer-links li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.footer-links li:last-child {
+    margin-right: 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+>>>>>>> master
 }
 
 .footer-links li {
@@ -210,4 +351,3 @@ footer {
 .footer-links a:hover {
     text-decoration: underline;
 }
-

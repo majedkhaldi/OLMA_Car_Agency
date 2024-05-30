@@ -11,21 +11,52 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+
+    <nav class="navbar">
+        <a href="/" class="nav-link"><img src="{% static 'images/pngegg-2.png' %}" alt="Home-logo" id="home-logo"></a>
+        <ul class="nav-links">
+            <li><a href="loginpage">User</a></li>
+            <li><a href="faqs">FAQs</a></li>
+            <li><a href="contactus">Contact Us</a></li>
+            {% if request.session.userid %}
+                <li><a href="cart">My Cart</a></li>
+                <li><a href="logout">Logout</a></li>
+            {% endif %}
+        </ul>
+        <img src="{% static 'images/logo1.png' %}" alt="Logo" id="logoo">
+    </nav>
+
+=======
     <div class="cont-top">
         <a href="/">Main Page</a>
         {% if request.session.userid%}
         <a class="log" href="logout">Logout</a>
         {%endif%}
     </div> <br>
+>>>>>>> master
     
 <div class="CO">
    
     
     <div class="container">
     <div class="contact-content">
+<<<<<<< HEAD
+        {% if messages %}
+        <ul class="messages" style="position: absolute; top: 190px;">
+            {% for message in messages %}
+                <li {% if message.tags == "soldout" %} 
+                {{message}}
+                {% endif %}></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        <p>If you have any questions, feel free to reach out to us using the form below.</p>
+=======
    
         <!-- <h1>Contact Us</h1>
         <p>If you have any questions, feel free to reach out to us using the form below.</p> -->
+>>>>>>> master
         <div class="main">
         <form method="post" action="{% url 'ContactUs' %}" class="contact-form">
             {% csrf_token %}

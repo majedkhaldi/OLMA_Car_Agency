@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     font-family: Arial, sans-serif;
     background-color: #000;
@@ -86,4 +87,94 @@ body::before {
 }
 .faq-question.active::after {
     content: '-';
+=======
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* overflow: hidden; */
+}
+body::before {
+    content: '';
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; */
+    /* background-image: url('https://cdn.wallpapersafari.com/12/40/120mvB.jpg'); 
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    z-index: -1;  */
+}
+
+.rightone{
+    position: absolute;
+    right: 1200px;
+    z-index: -1;
+
+}
+
+.leftone{
+    position: absolute;
+    left: 1200px;
+    z-index: -1;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #000000;
+    border-radius: 10px;
+}
+.faq-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    
+}
+.faq {
+    margin-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.faq-question {
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    /* padding-left: 100px; */
+    
+    border: 1px solid #ff6600;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    opacity: 0.8;
+}
+.faq-answer {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ff6600;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: #000000;
+    color: #ffffff;
+}
+.faq-question::after {
+    content: '+';
+    font-size: 1.5em;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff6600;
+}
+.faq-question.active::after {
+    content: '-';
+>>>>>>> master
 }

@@ -3,9 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <title>Review</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/cardetails.css' %}">
+</head>
+<body>
+   
+  <nav>
+    <img src="{% static 'images/logo1.png' %}" alt="Our-logo" id="logo">
+    <ul class="navbar">
+      <li><a href='{% url "LoginPage" %}'>User</a></li>
+      <li><a href='{% url "FAQS" %}'>FAQs</a></li>
+      <li><a href='{% url "AboutUs" %}'>About Us</a></li>
+      <li><a href='{% url "ContactUs" %}'>Contact Us</a></li>
+        {% if request.session.userid%}
+        <li><a href='{% url "shoppingcart" %}'>My Cart<img src="../static/images/cart1.png" alt="Cart"></a></li>
+        <li><a href='{% url "logout" %}'>logout</a></li>
+        {%endif%}
+    </ul>
+</nav>
+
+
+
+    <!-- Slider -->
+    <div class="slider">
+        <!-- List Items -->
+        <div class="list">
+            {% for image in car.images.all %}
+                <div class="item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image.image_url }}" alt="Image of {{ car.name }}">
+                    <div class="content">
+                        <h2>Details</h2>
+                          <ul class="details">
+                            <li><strong>Color</strong>: {{ car.color }}</li>
+                            <li><strong>Make</strong>: {{ car.make }}</li>
+                            <li><strong>Year</strong>: {{ car.year }}</li>
+                            <li><strong>Model</strong>: {{ car.model }}</li>
+                            <li><strong>Price</strong>: {{ car.price }}</li>
+                        </ul>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Button Arrows -->
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+        <!-- Thumbnail -->
+        <div class="thumbnail">
+            {% for image in car.images.all %}
+                <div class="item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image.image_url }}" alt="Image of {{ car.name }}">
+                    <div class="content">Name Slider</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+   
+
+    <!-- Messages and Comments -->
+    <div class="container">
+    <div class="review-box">
+      <form action="/message/{{car.id}}" method="POST">
+        {% csrf_token %}
+      <label for="review">Post a Review</label>
+      <textarea id="review" rows="4" cols="50" placeholder="Add your review here" name="reviewmessage"></textarea>
+      <button type="submit" onclick="addReview()">Add a Review</button>
+    </form>
+  </div>
+
+  <div class="reviews-section">
+    {% for i in message %}
+        <div>
+            <p><strong>{{ i.user.name }}:</strong>  {{ i.message }}</p>
+            <div >
+              <ul>
+                {% for comment in i.comments.all %}
+                <li class="commentitems">
+                  <p><strong>{{ comment.user.name }}:</strong> {{ comment.comment }}</p>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <form action="create_comment/{{i.id}}" method="POST">
+                {% csrf_token %}
+                <div class="comments-section">
+                <div class="comment-box">
+                  <label for="comment">Post a Comment</label>
+                  <textarea id="comment" rows="4" cols="50" placeholder="Add your comment here" name="reviewcomment"></textarea>
+                  <button type="submit" onclick="addComment()">Add a Comment</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+    
+    <script src="{% static 'js/cardetails.js' %}"></script>
+</body>
+</html>
+=======
     <title>Document</title>
 </head>
 <body>
     <h1>in progress</h1>
 </body>
 </html>
+>>>>>>> master

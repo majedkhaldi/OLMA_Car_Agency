@@ -13,21 +13,30 @@
     <video src="https://videos.pexels.com/video-files/6872081/6872081-uhd_3840_2160_25fps.mp4" autoplay muted loop></video>
     <div class="background-overlay">
         <nav>
+            <img src="{% static 'images/logo1.png' %}" alt="Our-logo" id="logo">
             <ul class="navbar">
                 <li><a href="loginpage">User</a></li>
                 <li><a href="faqs">FAQs</a></li>
                 <li><a href="aboutus">About Us</a></li>
                 <li><a href="contactus">Contact Us</a></li>
                 {% if request.session.userid%}
+<<<<<<< HEAD
+                <li><a href="cart">My Cart</a></li>
+                <li><a href="logout" id="logout">Logout</a></li>
+=======
                 <li><a href="logout">logout</a></li>
+>>>>>>> master
                 {%endif%}
             </ul>
             <img src="{% static 'images/logo1.png' %}" alt="Our-logo" id="logo">
         </nav>
-
         <div class="all-header-contents">
             <div class="header-content">
+<<<<<<< HEAD
+                <h1>"Unlock Your Journey Drive Uniqueness"</h1>
+=======
                 <h1><span>Unlock Your Journey,</span><br><span> Drive Uniqueness</span></h1>
+>>>>>>> master
                 <a href="process"><button class="btn">Take a Journey</button></a>
             </div>
         </div>

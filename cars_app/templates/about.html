@@ -17,12 +17,20 @@
             <li><a href="faqs">FAQs</a></li>
             <li><a href="contactus">Contact Us</a></li>
             {% if request.session.userid %}
+<<<<<<< HEAD
+                <li><a href="cart">My Cart</a></li>
+                <li><a href="logout" id="logout">Logout</a></li>
+=======
                 <li><a href="logout">Logout</a></li>
+>>>>>>> master
             {% endif %}
         </ul>
         <img src="{% static 'images/logo1.png' %}" alt="Logo" id="logoo">
     </nav>
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
     <div class="header-section">
         <div class="about-content">
             <h1>About Our Agency</h1>
@@ -31,12 +39,21 @@
             <div class="statistics">
                 <div class="stat-item">
                     <i class="fas fa-car fa-3x"></i>
+<<<<<<< HEAD
+                    <h2 id="sales">{{total_price}}</h2>
+                    <p>Last Year Sales in Millions</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-users fa-3x"></i>
+                    <h2 id="visitors">{{numberofvisitors}}</h2>
+=======
                     <h2 id="sales">0</h2>
                     <p>Last Year Sales</p>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-users fa-3x"></i>
                     <h2 id="visitors">0</h2>
+>>>>>>> master
                     <p>Page Visitors Yearly</p>
                 </div>
                 <div class="stat-item">
@@ -45,7 +62,10 @@
                     <p>Last Year Contracts</p>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
             <div class="chart-container">
                 <canvas id="salesChart"></canvas>
             </div>
@@ -79,22 +99,43 @@
                 
                 <div class="team-member">
                     <img src="{% static 'images/tabakhna.png' %}" alt="Home-logo">
+<<<<<<< HEAD
+                    <h2><strong>Mohammad Tabakhna</strong></h2>
+                    <p>Owner</p>
+=======
                     <p><strong>Mohammad Tabakhna</strong>,Owner</p>
+>>>>>>> master
                     <p>From Palestine, Ramallah</p>
                 </div>
                 <div class="team-member">
                     <img src="{% static 'images/majed.png' %}" alt="Home-logo">
+<<<<<<< HEAD
+                    <h2><strong>Majed Khaldi</strong></h2>
+                    <p>Owner</p>
+=======
                     <p><strong>Majed Khaldi</strong>, Owner</p>
+>>>>>>> master
                     <p>From Palestine, Ramallah</p>
                 </div>
                 <div class="team-member">
                     <img src="{% static 'images/ola2.png' %}" alt="Home-logo">
+<<<<<<< HEAD
+                    <h2><strong>Ola Jaafreh</strong></h2>
+                    <p>Owner</p>
+                    <p>FromPalestine,Alquds Abu-Dis</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/laith.png' %}" alt="Home-logo">
+                    <h2><strong>Laith Amer</strong></h2>
+                    <p>Owner</p>
+=======
                     <p><strong>Ola Jaafreh</strong>, Owner</p>
                     <p>From Palestine, Alquds Abu-Dis</p>
                 </div>
                 <div class="team-member">
                     <img src="{% static 'images/laith.png' %}" alt="Home-logo">
                     <p><strong>Laith Amer</strong>, Owner</p>
+>>>>>>> master
                     <p>From Palestine, Qalqiliya</p>
                 </div>
             </div>
@@ -122,6 +163,16 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+      <!-- Footer -->
+      <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Contact Us</h3>
+                <p>Olma Agency</p>
+                <p>123 Main Street, Ramallah, Palestine</p>
+                <p>Email: agencyolma@gmail.com</p>
+=======
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -130,6 +181,7 @@
                 <p>Car Agency</p>
                 <p>123 Main Street, Ramallah, Palestine</p>
                 <p>Email: info@caragency.com</p>
+>>>>>>> master
                 <p>Phone: +970 2 123 4567</p>
             </div>
             <div class="footer-social">
@@ -142,10 +194,17 @@
             <div class="footer-nav">
                 <h3>Quick Links</h3>
                 <ul>
+<<<<<<< HEAD
+                    <li><a href="/">Home</a></li>
+                    <li><a href="aboutus">About Us</a></li>
+                    <li><a href="*">Services</a></li>
+                    <li><a href="contactus">Contact</a></li>
+=======
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="contact.html">Contact</a></li>
+>>>>>>> master
                 </ul>
             </div>
         </div>
@@ -157,6 +216,60 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% load static %}
+<<<<<<< HEAD
+    <script>
+        $(document).ready(function() {
+            function countUp(element, endValue, duration) {
+                let startValue = 0;
+                let increment = endValue / (duration / 10);
+
+                function updateCount() {
+                    startValue += increment;
+                    element.text(Math.ceil(startValue));
+                    if (startValue < endValue) {
+                        setTimeout(updateCount, 10);
+                    } else {
+                        element.text(endValue);
+                    }
+                }
+
+                updateCount();
+            }
+
+            countUp($('#sales'), {{total_price}}, 2000);   
+            countUp($('#visitors'), {{numberofvisitors}}, 2000); 
+            countUp($('#contracts'), 367, 2000);  
+
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    datasets: [{
+                        label: 'Monthly Sales',
+                        data: [120, 150, 180, 220, 240, 200, 180, 210, 250, 280, 300, 320],
+                        backgroundColor: 'rgba(255, 152, 0, 0.2)',
+                        borderColor: '#ff9800',
+                        borderWidth: 2,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                        },
+                        y: {
+                            beginAtZero: true,
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+=======
+>>>>>>> master
     <script src="{% static 'js/about.js' %}"></script>
 </body>
 </html>
