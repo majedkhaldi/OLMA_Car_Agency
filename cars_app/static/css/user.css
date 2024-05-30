@@ -6,30 +6,114 @@
 }
 
 body {
-    background-color: #f0f2f5;
+    background-image: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.4)) ,url('../images/R4.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
     color: #333;
     line-height: 1.6;
 }
 
-.user-top {
-    background-color: #333;
-    padding: 15px;
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.navbar-links li a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ddd;
+    display: block;
+    width: 100%;
     text-align: center;
 }
 
-.user-top a {
-    text-decoration: none;
+.navbar-links {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.navbar .logo img {
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-bottom: 20px;
+}
+
+.navbar .logo img:hover {
+    border: 2px solid #ff9800;
+    color: #ff9800;
+    background-color: #575757
+}
+
+.navbar .log {
     color: #fff;
+    text-decoration: none;
     font-size: 18px;
     font-weight: bold;
 }
 
-.user-top a:hover {
+.navbar-links li a:hover {
     color: #ff9800;
+    background-color: #575757;
+}
+
+body {
+    padding-left: 250px;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        width: 100px;
+    }
+    .navbar-links li a {
+        text-align: center;
+        font-size: 14px;
+    }
+    body {
+        padding-left: 100px;
+    }
+}
+
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.search-container label {
+    color: #fff;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.search-container input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 500px; /* Adjust max-width as needed */
+    cursor: pointer;
+}
+
+.search-container input::placeholder {
+    text-align: center;
 }
 
 .user-form {
-    max-width: 800px;
+    max-width: 70%;
     margin: 40px auto;
     padding: 20px;
     background: #fff;
@@ -62,61 +146,196 @@ body {
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .user-form button:hover {
     background-color: #ff9800;
-}
-
-.carsCard {
-    background-color: #fff; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-    border-radius: 10px; 
-    padding: 20px; 
-    margin: 40px auto; 
-    max-width: 300px; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    text-align: center; 
     cursor: pointer;
 }
 
+.all-cars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 80%;
+}
+
+.carsCard {
+    background-color: rgba(51, 51, 51, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 300px;
+}
+
 .carsCard img {
-    width: 100%; 
-    height: auto; 
-    border-radius: 10px; 
-    margin-bottom: 20px; 
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    height: 200px;
 }
 
-.carsCard h2, .carsCard h3 {
-    color: #333; 
-    margin: 10px 0; 
+.carsCard h3 {
+    color: #fff;
+    margin: 4px 0;
 }
 
-.carsCard input[type="submit"] {
-    background-color: #333; 
-    color: #fff; 
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 16px; 
-    transition: background-color 0.3s; 
+.carsCard a {
+    text-decoration: none;
+    margin-top: 10px;
 }
 
-.carsCard input[type="submit"]:hover {
-    background-color: #ff9800; 
+.carsCard button {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-.carsCard:hover {
-    transform: scale(1.02); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
-    background-color: #333;
-}
-.carsCard:hover h3{
+.carsCard button:hover {
+    background-color: #ff9800;
     color: #fff;
 }
 
-.carsCard:hover input{
-    background-color: #ff9800;
+.carsCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
 }
 
+.carsCard:hover h3 {
+    color: #333;
+}
+
+.carsCard:hover button {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.carsCard .card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    margin-right: 250px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-info h3,
+.footer-social h3,
+.footer-nav h3 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.footer-info p,
+.footer-nav ul,
+.footer-nav ul li,
+.footer-nav ul li a {
+    color: #fff;
+    margin: 5px 0;
+}
+
+.footer-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-nav ul li a:hover {
+    color: #ff9800;
+}
+
+.footer-social a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.5rem;
+}
+
+.footer-social a:hover {
+    color: #ff9800;
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #fff;
+}
+
+#price_from {
+    background-color: #333;
+    color: #fff;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+
+#price_to {
+    background-color: #333;
+    color: #fff;
+    width: 70px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+/* #logo{
+    width: 5%;
+} */
+@media screen and (max-width: 768px) {
+    .all-cars {
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+
+    .carsCard {
+        max-width: 100%;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .user-form {
+        padding: 20px 10px;
+        max-width: 100%;
+    }
+}

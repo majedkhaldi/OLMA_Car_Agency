@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addTocart.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<div class="all-contents">
+    <nav>
+        <ul class="navbar">
+            <li><a href="/">Main Page</a></li>
+        </ul>
+    </nav>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="flex-contents">
+        <div class="container">
+            <h1>Car Agency Inventory</h1>
+            <form action="checkout" method="post">
+                {% csrf_token %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Car Image</th>
+                            <th>Car Make</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for car in cart.cars.all %}
+                        <tr>
+                            <td><img width="100px" src="{{car.img}}" alt=""></td>
+                            <td>{{car.make}}</td>
+                            <td>{{car.model}}</td>
+                            <td>{{car.year}}</td>
+                            <td class="price">{{car.price}}</td>
+                            <td><input type="number" value="1" min="1" class="quantity" name="{{car.id}}" data-id="{{car.id}}" data-price="{{car.price}}" ></td>
+                            <td><a href="removeitem/{{car.id}}">remove</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="summary-container">
+                    <p>Total Price: $<span id="totalPrice">{{total_price}}</span></p>
+                    <p>Total Quantity: <span id="totalQuantity">{{total_quantity}}</span></p>
+                    <button type="submit" id="checkoutButton">Checkout</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Contact Us</h3>
+                <p>Car Agency</p>
+                <p>123 Main Street, Ramallah, Palestine</p>
+                <p>Email: info@caragency.com</p>
+                <p>Phone: +970 2 123 4567</p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Car Agency. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/cart.js' %}"></script>
+
+</div>
+</body>
+</html>

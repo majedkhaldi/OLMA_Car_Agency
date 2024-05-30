@@ -6,46 +6,184 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/user.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% load static %}
     <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Responsive Form and Table</title>
 </head>
 <body>
-    <div class="user-top">
-        <a href="index.html">Main Page</a>
+    <div class="navbar">
+        <a href="/" class="logo"><img src="../static/images/pngegg-2.png" alt="Logo"></a>
+        <ul class="navbar-links">
+            <li><a href="loginpage">User</a></li>
+            <li><a href="faqs">FAQs</a></li>
+            <li><a href="aboutus">About Us</a></li>
+            <li><a href="contactus">Contact Us</a></li>
+            {% if request.session.userid %}
+            <li><a href="logout">Logout</a></li>
+            {% endif %}
+        </ul>
+        {% if request.session.userid %}
+        <a class="log" href="logout">Logout</a>
+        {% endif %}
     </div>
+
+    <!-- <div><img src="../static/images/logo1.png" alt="Logo" id="logo"></div> -->
+
+    <div class="search-container">
+        <label for="search">Search</label>
+        <input type="text" id="search-input" name="search" placeholder="Search for cars...">
+    </div>
+    </div>
+    <ul id="search-results"></ul>
+    
     <div class="user-form">
-        <form action="Process">
+        <form action="process">
             <select name="make" id="make">
-                <option>--Make--</option>
+                <option value="">--Make--</option>
+                {% for make in makes %}
+                <option value="{{ make }}">{{ make }}</option>
+                {% endfor %}
             </select>
             <select name="model" id="model">
-                <option>--Model--</option>
+                <option value="">--Model--</option>
+                {% for model in models %}
+                <option value="{{ model }}">{{ model }}</option>
+                {% endfor %}
             </select>
             <select name="year_from" id="year_from">
-                <option>--Year From--</option>
+                <option value="">--Year From--</option>
+                {% for year in years %}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
             </select>
             <select name="color" id="color">
-                <option>--Color--</option>
+                <option value="">--Color--</option>
+                {% for color in colors %}
+                <option value="{{ color }}">{{ color }}</option>
+                {% endfor %}
             </select>
-            <select name="price" id="price">
+            <!-- <select name="price" id="price">
                 <option>--Price--</option>
-            </select>
-            <button type="reset">Reset</button>
+            </select> -->
+            <label for="min_price" id="price_from">Price from </label>
+            <input type="number" step="0.01" name="min_price" id="min_price">
+            <label for="max_price" id="price_to">To</label>
+            <input type="number" step="0.01" name="max_price" id="max_price">
+            <button type="submit">Filter</button>
         </form>
     </div>
-    {%for car in cars%}
-    <div class="carsCard">
-        <img src="{{car.img}}" alt="bmw">
-        <h3>{{car.make}}</h3>
-        <h3>{{car.model}}</h3>
-        <h3>{{car.year}}</h3>
-        <h3>{{car.price}}</h3>
-        <input type="submit" value="Add to Cart">
+    <div class="all-cars" id="car-list">
+        {% for car in cars %}
+        <div class="carsCard">
+            <img src="{{ car.img }}" alt="{{ car.make }}">
+            <h3>{{ car.make }}</h3>
+            <h3>{{ car.model }}</h3>
+            <h3>{{ car.year }}</h3>
+            <h3>{{ car.price }}</h3>
+            <div class="card-actions">
+            {% if car.inventory > 0%}
+            <a href="shoppingcart/{{ car.id }}"><button>Add to Cart</button></a>
+            {% else %}
+            <a href="soldout"><button style="background-color: black; color: aliceblue;">Sold Out</button></a>
+            {% endif %}
+                <a href="cardetails/{{ car.id }}">View Details >></a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {%endfor%}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% load static %}
-      <link rel="stylesheet" href="{% static 'js/main.js' %}">
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-info">
+                    <h3>Contact Us</h3>
+                    <p>Car Agency</p>
+                    <p>123 Main Street, Ramallah, Palestine</p>
+                    <p>Email: info@caragency.com</p>
+                    <p>Phone: +970 2 123 4567</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="footer-nav">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Car Agency. All Rights Reserved.</p>
+            </div>
+        </footer>
+    
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#search-input').on('keyup', function() {
+                    var query = $(this).val().trim();
+                    if (query === '') {
+                        // If the search input is empty, fetch all cars
+                        $.ajax({
+                            url: '{% url "all_cars" %}', // Update this with the correct URL for fetching all cars
+                            dataType: 'json',
+                            success: function(data) {
+                                $('#car-list').empty();
+                                for (var i = 0; i < data.length; i++) {
+                                    var car = data[i];
+                                    $('#car-list').append(
+                                        '<div class="carsCard">' +
+                                        '<img src="' + car.img + '" alt="' + car.make + '">' +
+                                        '<h3>' + car.make + '</h3>' +
+                                        '<h3>' + car.model + '</h3>' +
+                                        '<h3>' + car.year + '</h3>' +
+                                        '<h3>' + car.price + '</h3>' +
+                                        '<a href="shoppingcart/' + car.id + '"><button>Add to Cart</button></a>' +
+                                        '<a href="cardetails/' + car.id + '">View Detail</a>' +
+                                        '</div>'
+                                    );
+                                }
+                            }
+                        });
+                    } else {
+                        // If there is a query, perform the search as before
+                        $.ajax({
+                            url: '{% url "search_cars" %}',
+                            data: {
+                                'q': query
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                $('#car-list').empty();
+                                if (data.length === 0) {
+                                    $('#car-list').append('<p>No results found</p>');
+                                } else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        var car = data[i];
+                                        $('#car-list').append(
+                                            '<div class="carsCard">' +
+                                            '<img src="' + car.img + '" alt="' + car.make + '">' +
+                                            '<h3>' + car.make + '</h3>' +
+                                            '<h3>' + car.model + '</h3>' +
+                                            '<h3>' + car.year + '</h3>' +
+                                            '<h3>' + car.price + '</h3>' +
+                                            '<a href="shoppingcart/' + car.id + '"><button>Add to Cart</button></a>' +
+                                            '<a href="cardetails/' + car.id + '">View Detail</a>' +
+                                            '</div>'
+                                        );
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
 </body>
 </html>

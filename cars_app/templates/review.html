@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+</head>
+<body>
+    <div>
+        welcome:{{request.session.name}}
+    </div>
+    <form action="/message/{{request.session.userid}}" method="POST">
+        {% csrf_token %}
+        
+        <label for="">Post a Review</label>
+        <input type="textarea" name="message">
+        <button type="submit">Add a Review</button>
+    </form>
+    {% for i in message %}
+
+    {{i.message}}
+     {%for comment in i.comments.all %}
+    {{comment.comment}}
+    {% endfor %}
+    <form action="/create_comment/{{i.id}}/{{request.session.userid}}" method="POST">
+        {% csrf_token %}
+        <label for="">Post a Comment</label>
+        <input type="textarea" name="comment">
+        <button type="submit">Add a comment</button>
+    </form>
+    {% endfor %}
+</body>
+</html>

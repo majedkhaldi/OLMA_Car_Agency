@@ -40,7 +40,7 @@ class User(models.Model):
 
 
 class Cart(models.Model):
-    quantity = models.PositiveIntegerField()
+    total_price = models.PositiveIntegerField(default=0)
     user = models.OneToOneField(User,on_delete= models.CASCADE)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
@@ -53,26 +53,42 @@ class Car(models.Model):
     price = models.FloatField()
     img = models.TextField()
     color = models.CharField(max_length=45)
+    inventory = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
-    cart = models.ForeignKey(Cart, related_name="cars", on_delete=models.CASCADE, null = True, blank= True)
+    carts = models.ManyToManyField(Cart, related_name="cars", blank= True)
     users = models.ManyToManyField(User,related_name="cars", blank= True)
     objects = CarManager() 
 
 
 class Order(models.Model):
-    car = models.ForeignKey(Car,on_delete= models.CASCADE)
+    cars = models.ManyToManyField(Car,related_name='orders')
     user = models.ForeignKey (User,on_delete= models.CASCADE)
     total_amount = models.PositiveIntegerField()
-    date = models.DateField()
+    total_price = models.PositiveIntegerField()
     status = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
 
 class Appointment(models.Model):
     user = models.ForeignKey (User,on_delete= models.CASCADE, related_name= 'appointments')
-    date = models.DateField()
+    date = models.DateField(null=True)
     status = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add =True)
     updated_at = models.DateTimeField(auto_now =True)
+
+
+class Messages(models.Model):
+    message=models.TextField(max_length=45)
+    user = models.ForeignKey(User, related_name='messages',on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add = True,null=True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+class Comments(models.Model):
+    comment=models.TextField(max_length=45)
+    user = models.ForeignKey(User,related_name='comments' ,on_delete=models.CASCADE,null=True)
+    message = models.ForeignKey(Messages, related_name='comments',on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add = True,null=True)
+    updated_at = models.DateTimeField(auto_now = True)
+
 

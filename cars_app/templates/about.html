@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>About Us - Car Agency</title>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <a href="/" class="nav-link"><img src="{% static 'images/pngegg-2.png' %}" alt="Home-logo" id="home-logo"></a>
+        <ul class="nav-links">
+            <li><a href="loginpage">User</a></li>
+            <li><a href="faqs">FAQs</a></li>
+            <li><a href="contactus">Contact Us</a></li>
+            {% if request.session.userid %}
+                <li><a href="logout">Logout</a></li>
+            {% endif %}
+        </ul>
+        <img src="{% static 'images/logo1.png' %}" alt="Logo" id="logoo">
+    </nav>
+
+    <div class="header-section">
+        <div class="about-content">
+            <h1>About Our Agency</h1>
+            <p>Welcome to our car agency, where We specialize in offering a wide range of vehicles to meet your needs.
+                From luxury cars to family SUVs, we have something for everyone.</p>
+            <div class="statistics">
+                <div class="stat-item">
+                    <i class="fas fa-car fa-3x"></i>
+                    <h2 id="sales">0</h2>
+                    <p>Last Year Sales</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-users fa-3x"></i>
+                    <h2 id="visitors">0</h2>
+                    <p>Page Visitors Yearly</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-file-contract fa-3x"></i>
+                    <h2 id="contracts">0</h2>
+                    <p>Last Year Contracts</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="additional-content">
+        <div class="sub-additional">
+            <div class="company-overview">
+                <div class="company-left">
+                    <h2>Company Overview</h2>
+                    <p>Since 1999, our Car Agency has been dedicated to providing top-notch automotive solutions. Founded by Ola
+                        jaafreh, Mohammad Tabakhna, Majed Khaldi, and Laith Amer, we have grown from a small dealership to a
+                        full-service agency offering a wide range of vehicles and services.</p>
+                    <h3>Our Mission</h3>
+                    <p>At Our Car Agency, our mission is to offer quality vehicles and unparalleled customer service. We strive
+                        to make every customer's journey enjoyable and hassle-free.</p>
+                    <h3>Our Vision</h3>
+                    <p>We envision becoming the leading car agency in [Location/Region], known for our commitment to quality,
+                        innovation, and community involvement.</p>
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li><strong>Customer First</strong>: Your satisfaction is our top priority.</li>
+                        <li><strong>Integrity</strong>: We conduct our business with honesty and transparency.</li>
+                        <li><strong>Innovation</strong>: Continuously improving and embracing new technologies.</li>
+                    </ul>
+                </div>
+                <img src="{% static 'images/sean-pollock-PhYq704ffdA-unsplash.jpg' %}" alt="Home-logo">
+            </div>
+            <h2 id="meet">Meet Our Team</h2>
+            <div class="team">
+                
+                <div class="team-member">
+                    <img src="{% static 'images/tabakhna.png' %}" alt="Home-logo">
+                    <p><strong>Mohammad Tabakhna</strong>,Owner</p>
+                    <p>From Palestine, Ramallah</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/majed.png' %}" alt="Home-logo">
+                    <p><strong>Majed Khaldi</strong>, Owner</p>
+                    <p>From Palestine, Ramallah</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/ola2.png' %}" alt="Home-logo">
+                    <p><strong>Ola Jaafreh</strong>, Owner</p>
+                    <p>From Palestine, Alquds Abu-Dis</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/laith.png' %}" alt="Home-logo">
+                    <p><strong>Laith Amer</strong>, Owner</p>
+                    <p>From Palestine, Qalqiliya</p>
+                </div>
+            </div>
+            <div class="services">
+                <h2>What We Offer</h2>
+                <ul>
+                    <li><strong>New and Pre-Owned Vehicles</strong>: A wide selection of the latest models and quality pre-owned cars.</li>
+                    <li><strong>Financing Options</strong>: Competitive financing solutions tailored to your needs.</li>
+                    <li><strong>Maintenance Services</strong>: Comprehensive maintenance and repair services.</li>
+                </ul>
+            </div>
+            <div class="why-choose-us">
+                <h2>Why Choose Us</h2>
+                <ul>
+                    <li><strong>Quality Assurance</strong>: Every vehicle undergoes rigorous inspections.</li>
+                    <li><strong>Exceptional Customer Service</strong>: Our team is dedicated to providing personalized service.</li>
+                    <li><strong>Community Focus</strong>: Proud supporters of local charities and events.</li>
+                </ul>
+            </div>
+            <div class="testimonials">
+                <h2>Testimonials</h2>
+                <p>"Buying a car from [Car Agency Name] was the best decision. The service was exceptional, and I love my
+                    new car!" - [Customer Name]</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Contact Us</h3>
+                <p>Car Agency</p>
+                <p>123 Main Street, Ramallah, Palestine</p>
+                <p>Email: info@caragency.com</p>
+                <p>Phone: +970 2 123 4567</p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="footer-nav">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Car Agency. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/about.js' %}"></script>
+</body>
+</html>
