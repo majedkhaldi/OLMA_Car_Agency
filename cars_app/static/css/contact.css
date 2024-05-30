@@ -8,6 +8,7 @@ body {
     align-items: center;
     color: #fff; */
 }
+<<<<<<< HEAD
 .navbar {
     position: fixed;
     top: 0;
@@ -76,6 +77,10 @@ body {
 }
 .CO{
     margin-top: 13rem;
+=======
+
+.CO{
+>>>>>>> master
     /* background: linear-gradient(45deg, #050505, #0d0d0e); */
     /* height: 100vh; */
     font-family: "Montserrat", sans-serif;
@@ -93,9 +98,17 @@ body {
     top: 300px;
     left: 50%;
     width: 100%;
+<<<<<<< HEAD
 }
 
 .container {
+=======
+  }
+
+.container {
+    /* position: relative;
+    left:50%; */
+>>>>>>> master
     margin: 0 auto;
     width: 100%;
     max-width: 600px;
@@ -104,6 +117,10 @@ body {
     justify-content: center;
     align-items: center;
     color: #fff;
+<<<<<<< HEAD
+=======
+    /* background-color: teal; */
+>>>>>>> master
 }
 
 .cont-top {
@@ -253,10 +270,17 @@ form:hover {
     text-align: center;
 }
 
+<<<<<<< HEAD
  .messages li {
     background: rgba(0, 0, 0, 0.5);
     padding: 10px;
     margin-bottom: 50px;
+=======
+.messages li {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin-bottom: 5px;
+>>>>>>> master
     border-radius: 5px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -295,7 +319,11 @@ form:hover {
   .drop-4 {
     height: 120px;
     width: 120px;
+<<<<<<< HEAD
     top: -30px;
+=======
+    top: -60px;
+>>>>>>> master
     right: -60px;
   }
   .drop-5 {

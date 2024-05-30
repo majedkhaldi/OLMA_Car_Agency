@@ -24,7 +24,17 @@ video {
     z-index: -1;
     background-size: cover;
 }
-
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
 .background-overlay {
     position: relative;
     width: 100%;
@@ -33,6 +43,7 @@ video {
     background-size: cover;
     background-position: center;
 }
+
 
 .background-overlay::before {
     content: '';
@@ -43,6 +54,7 @@ video {
     height: 100%;
     background: rgba(0, 0, 0, 0.2);
     z-index: 1;
+
 }
 
 nav {
@@ -52,6 +64,7 @@ nav {
     overflow: hidden;
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     height: 80px;
     width: 100%;
     padding: 0 20px;
@@ -61,8 +74,15 @@ nav {
 nav img{
     width: 16rem;
     height: auto;
+=======
+    height: 50px;
+>>>>>>> master
 }
 
+nav img{
+    width: 400px;
+
+}
 .navbar {
 
     list-style-type: none;
@@ -74,9 +94,15 @@ nav img{
 }
 
 .navbar li {
+<<<<<<< HEAD
     margin: 4px;
     width:200px;
     margin: auto;
+=======
+    float: left;
+    width: 12.5%;
+    padding: 1%;
+>>>>>>> master
 }
 
 .navbar li a {
@@ -88,7 +114,12 @@ nav img{
     transition: background-color 0.3s, color 0.3s;
     font-size: 25px;
     font-weight: bold;
+<<<<<<< HEAD
     cursor: pointer;
+=======
+    width: 150px;
+
+>>>>>>> master
 }
 
 .navbar li a:hover {
@@ -124,9 +155,14 @@ nav img{
     text-align: center;
     position: relative;
     z-index: 2;
+<<<<<<< HEAD
     background-color: rgba(0, 0, 0, 0.3);
     box-shadow: 2px 2px 10px black;
     padding: 30px;
+=======
+    background-color: rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 10px black;
+>>>>>>> master
     
 }
 
@@ -151,9 +187,14 @@ nav img{
     font-size: 50px;
     font-weight: bold;
     text-align: center;
+<<<<<<< HEAD
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+=======
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Add text shadow */
+}
+>>>>>>> master
 .header-content h1 span {
     position: relative;
     display: inline-block;
@@ -161,7 +202,6 @@ nav img{
     opacity: 0;
     transition: all 0.6s ease;
 }
-
 .header-content button {
     margin-top: 15%;
     color: white;
@@ -178,7 +218,11 @@ nav img{
 }
 
 .header-content button:hover {
+<<<<<<< HEAD
     background-color: #ffcc80;
+=======
+    background-color: #ffcc80; /* Change the hover background color */
+>>>>>>> master
     color: black;
     transform: scale(1.1);
 }
@@ -210,6 +254,7 @@ nav img{
     }
 }
 
+<<<<<<< HEAD
 @media screen and (max-width: 480px) {
     .header-content h1 {
         font-size: 36px;
@@ -229,6 +274,20 @@ footer {
     background-color: rgba(51, 51, 51, 0.4);
     color: white;
     padding: 20px 0;
+=======
+body {
+    position: relative; 
+    min-height: 100vh; 
+}
+
+footer {
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    background-color: rgba(51, 51, 51,0.4); 
+    color: white;
+    padding: 20px 0; 
+>>>>>>> master
     text-align: center;
     z-index: 2;
 }
@@ -239,16 +298,40 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+<<<<<<< HEAD
     flex-wrap: wrap;
+=======
+>>>>>>> master
 }
 
 .footer-links {
     list-style: none;
     padding: 0;
     margin: 0;
+<<<<<<< HEAD
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+=======
+}
+
+.footer-links li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.footer-links li:last-child {
+    margin-right: 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+>>>>>>> master
 }
 
 .footer-links li {

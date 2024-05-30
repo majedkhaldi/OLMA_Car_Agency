@@ -28,13 +28,22 @@ urlpatterns = [
     path('process', views.cars_page,name='cars_page'), 
     path('all_cars', views.all_cars, name='all_cars'), 
     path('registerpage', views.register),	
+<<<<<<< HEAD
     path('loginpage', views.login_page,name='LoginPage'),	
     path('logout', views.logout,name='logout'),	
     path('cardetails/<c_id>/', views.car_detail, name='details'),
+=======
+    path('loginpage', views.login_page),	
+    path('logout', views.logout),	
+    path('cardetails/<c_id>', views.car_detail),
+>>>>>>> master
     path('search/',  views.search_cars, name='search_cars'),
     path('removeitem/<int:c_id>',  views.removeitem),	
     path('soldout',  views.soldout),	
     path('checkout',  views.checkout),	
+<<<<<<< HEAD
     path('message/<int:c_id>',  views.addmessage),	
     path('cardetails/<c_id>/create_comment/<int:m_id>',  views.addcomment, name='addcomment'),	
+=======
+>>>>>>> master
 ]

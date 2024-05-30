@@ -21,13 +21,18 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
+<<<<<<< HEAD
     background-color: rgba(0, 0, 0, 0.7);
+=======
+    background-color: rgba(0, 0, 0, 0.9);
+>>>>>>> master
     padding: 10px 20px;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100px;
+<<<<<<< HEAD
     border-bottom: 1px solid #ff9800;
 }
 
@@ -39,6 +44,16 @@ body {
 .navbar .nav-link img:hover{
     border: 2px solid #ff9800 ;
 }
+=======
+}
+
+.navbar .nav-link img {
+    width: 10%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+>>>>>>> master
 .navbar #logoo {
     width: 15%;
 }
@@ -47,15 +62,20 @@ body {
     display: flex;
     list-style: none;
     gap: 20px;
+<<<<<<< HEAD
     margin-right: 200px;
     width: 80%;
     justify-content: center;
     padding: 10px;
 
+=======
+    margin-right: 280px;
+>>>>>>> master
 }
 
 .nav-links li {
     display: inline-block;
+<<<<<<< HEAD
     width: 20%;
     text-align: center;
     font-size: 1.7rem;
@@ -84,6 +104,25 @@ body {
     width: 100%;
     text-align: center;
     margin-top: 8.5rem;
+=======
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links a:hover {
+    color: #ff9800;
+    background-color: #fff;
+}
+
+.header-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 60px;
+>>>>>>> master
 }
 
 .about-content {
@@ -105,6 +144,7 @@ body {
     justify-content: space-around;
     margin: 20px 0;
 }
+<<<<<<< HEAD
 #logout {
     color: white;
     border: 1px solid black;
@@ -117,6 +157,9 @@ body {
     border-radius: 5px;
     padding: 6px;
 } 
+=======
+
+>>>>>>> master
 .stat-item {
     text-align: center;
 }
@@ -143,7 +186,10 @@ body {
 
 .additional-content h2 {
     text-align: center;
+<<<<<<< HEAD
     font-size: 30px;
+=======
+>>>>>>> master
 }
 
 .company-overview,
@@ -180,6 +226,7 @@ body {
 .team-member {
     flex: 1;
     min-width: 150px;
+<<<<<<< HEAD
     max-width: 260px;
     margin: 10px;
     text-align: center;
@@ -189,6 +236,13 @@ body {
     color: #fff;
     font-size: 20px;
 }
+=======
+    max-width: 250px;
+    margin: 10px;
+    text-align: center;
+}
+
+>>>>>>> master
 .team-member img {
     width: 150px;
     height: 150px;
