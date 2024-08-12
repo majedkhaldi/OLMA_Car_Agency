@@ -1,25 +1,15 @@
 from django.core.mail import send_mail
-<<<<<<< HEAD
 from django.shortcuts import render, redirect ,get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import User, Order, Cart, Car, Messages,Comments
-=======
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib import messages
-from .models import User, Order, Cart, Car
->>>>>>> master
 from datetime import date
 import bcrypt
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.http import JsonResponse
 from django.db.models import Q
-<<<<<<< HEAD
 from django.db.models import Sum
-=======
->>>>>>> master
 
 def index(request):
     if 'visitorcounter' not in request.session:
@@ -38,7 +28,6 @@ def login_page(request):
         return redirect("index")
     return render(request,"login.html")
 
-<<<<<<< HEAD
 from django.db.models import Sum
 
 def aboutUs(request):
@@ -59,10 +48,6 @@ def aboutUs(request):
     
     return render(request, 'about.html', data)
 
-=======
-def aboutUs(request):
-    return render(request, 'about.html')
->>>>>>> master
 
 def contactUs(request):
     if request.method == 'POST':
@@ -94,16 +79,16 @@ def create(request):
 
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
-        for name, value in errors.items():
-            messages.error(request, value, extra_tags= 'nameerror')
-        for email, value in errors.items():
-            messages.error(request, value, extra_tags= 'emailerror')
-        for pnumber, value in errors.items():
-            messages.error(request, value, extra_tags= 'phoneerror')
-        for password, value in errors.items():
-            messages.error(request, value, extra_tags= 'passworderror')
-        for cpassword, value in errors.items():
-            messages.error(request, value, extra_tags= 'cpassworderror')
+        for key, value in errors.items():
+            messages.error(request, value)
+        # for email, value in errors.items():
+        #     messages.error(request, value, extra_tags= 'emailerror')
+        # for pnumber, value in errors.items():
+        #     messages.error(request, value, extra_tags= 'phoneerror')
+        # for password, value in errors.items():
+        #     messages.error(request, value, extra_tags= 'passworderror')
+        # for cpassword, value in errors.items():
+        #     messages.error(request, value, extra_tags= 'cpassworderror')
         return redirect('/registerpage')
     else:
         name = request.POST['name']
@@ -169,17 +154,12 @@ def cars_page(request):
     return render(request,"cars.html",data)
 
 def car_detail(request, c_id):
-<<<<<<< HEAD
     car = Car.objects.get(id=c_id)
     data = {
         'car' : Car.objects.get(id=c_id), 
         'message' : Messages.objects.filter(car = car),
     } 
     return render(request, 'car_details.html', data)
-=======
-    car =Car.objects.get(id=c_id) 
-    return render(request, 'car_details.html', {'car': car})
->>>>>>> master
 
 def shoppingCart(request):
     if 'userid' not in request.session:
@@ -269,11 +249,7 @@ def addtocart(request, C_id):
     # for car in carsINcart:
     #     total_amount += car.price
 
-<<<<<<< HEAD
     return redirect('/process')
-=======
-    return redirect('shoppingcart')
->>>>>>> master
 
 
 def checkout(request):
@@ -294,10 +270,7 @@ def checkout(request):
                 quantity = int(request.POST[car_id])
                 total_quantity += quantity
                 total_price += (quantity * car.price)
-<<<<<<< HEAD
                 car.inventory -= quantity
-=======
->>>>>>> master
 
     this_order = Order.objects.create(user=user, total_amount=total_quantity, total_price=total_price, status='pending')
     for car in cars_in_cart:
@@ -330,7 +303,6 @@ def fAQS(request):
 def logout(request):
     del request.session['userid']
     return redirect('/loginpage')
-<<<<<<< HEAD
 
 def search_cars(request):
     if request.method == 'GET':
@@ -366,32 +338,15 @@ def addmessage(request,c_id):
     message=request.POST['reviewmessage']
     user=User.objects.get(id=request.session['userid'])
     car=Car.objects.get(id=c_id)
+    # if car in user.orders.all():
     Messages.objects.create(message=message,user=user, car = car)
     return redirect('details',c_id)
     # data={
     #     'messages':Messages.objects.all()
     # }
     # return render(request,'car_details.html',data)
-=======
->>>>>>> master
 
-def search_cars(request):
-    if request.method == 'GET':
-        query = request.GET.get('q', '')
-        if query:
-            cars = Car.objects.filter(Q(make__icontains=query) | Q(model__icontains=query))
-        else:
-            cars = Car.objects.none() 
-        car_list = list(cars.values('id', 'make', 'model', 'year', 'price', 'img', 'color'))
-        return JsonResponse(car_list, safe=False)
-    
-def all_cars(request):
-    cars = Car.objects.all()
-    cars_list = list(cars.values('id', 'make', 'model', 'year', 'price', 'img'))
-    return JsonResponse(cars_list, safe=False)
-    
 
-<<<<<<< HEAD
 # def create_message(request,c_id):
 
 #     message=request.POST['message']
@@ -408,16 +363,3 @@ def addcomment(request,c_id,m_id):
     messages=Messages.objects.get(id=m_id)
     Comments.objects.create(comment=comment,user=user,message=messages)
     return redirect('details',c_id)
-=======
-def removeitem(request,c_id):
-    user = User.objects.get(id=request.session['userid'])
-    cart = Cart.objects.get(user=user)
-    this_car = Car.objects.get(id = c_id)
-    cart.cars.remove(this_car)
-    return redirect('/cart')
-
-def soldout (request):
-    if 'flag' not in request.session:
-        request.session['flag'] = 1
-    return redirect ('ContactUs')
->>>>>>> master
